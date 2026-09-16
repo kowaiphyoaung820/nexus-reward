@@ -54,20 +54,23 @@
   </div>
 
   <!-- Header -->
-  <header class="p-5 flex justify-between items-center z-10 border-b border-slate-800/40 backdrop-blur-md sticky top-0 bg-slate-950/80">
-    <div class="flex items-center space-x-3">
-      <div class="w-9 h-9 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-        <i class="fa-solid fa-bolt text-white text-sm"></i>
+  <header class="p-4 flex justify-between items-center z-10 border-b border-slate-800/40 backdrop-blur-md sticky top-0 bg-slate-950/80">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-8 h-8 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+        <i class="fa-solid fa-bolt text-white text-xs"></i>
       </div>
-      <span class="font-extrabold text-xl tracking-wide gradient-text">NEXUS</span>
+      <div>
+        <span class="font-extrabold text-base tracking-wide gradient-text block">NEXUS</span>
+        <span id="liveDateTime" class="text-[9px] text-slate-400 font-medium">--</span>
+      </div>
     </div>
     <div class="flex items-center space-x-2">
-      <button onclick="alert('Notifications coming soon!')" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition active:scale-95">
-        <i class="fa-regular fa-bell text-sm"></i>
+      <button onclick="alert('Notifications coming soon!')" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition active:scale-95">
+        <i class="fa-regular fa-bell text-xs"></i>
       </button>
-      <div id="userProfileBtn" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-xl">
-        <img id="userAvatar" src="https://via.placeholder.com/150" alt="Profile" class="w-6 h-6 rounded-full object-cover border border-indigo-500/50">
-        <span id="userName" class="text-xs font-bold text-slate-200 max-w-[90px] truncate">User</span>
+      <div id="userProfileBtn" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-2 py-1 rounded-xl">
+        <img id="userAvatar" src="https://via.placeholder.com/150" alt="Profile" class="w-5 h-5 rounded-full object-cover border border-indigo-500/50">
+        <span id="userName" class="text-[11px] font-bold text-slate-200 max-w-[80px] truncate">User</span>
       </div>
     </div>
   </header>
@@ -110,36 +113,8 @@
         <span class="text-[11px] font-bold text-indigo-400" id="streakLabel">Day 1 / 5</span>
       </div>
 
-      <div class="grid grid-cols-5 gap-2">
-        <div id="day1Card" onclick="claimDaily()" class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-indigo-500/60 bg-indigo-500/10 shadow-lg ring-1 ring-indigo-500/50 cursor-pointer active:scale-95 transition">
-          <span class="text-[10px] text-indigo-300 font-semibold" id="day1Text">🥇 Day 1</span>
-          <i id="day1Icon" class="fa-solid fa-gift text-indigo-400 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-white">+50</span>
-        </div>
-
-        <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🥈 Day 2</span>
-          <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+100</span>
-        </div>
-
-        <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🥉 Day 3</span>
-          <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+200</span>
-        </div>
-
-        <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🏅 Day 4</span>
-          <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+300</span>
-        </div>
-
-        <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🏆 Day 5</span>
-          <i class="fa-solid fa-box-archive text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+500</span>
-        </div>
+      <div class="grid grid-cols-5 gap-2" id="streakDaysContainer">
+        <!-- Will be dynamically generated for Day 1 to 5 -->
       </div>
     </div>
 
@@ -318,9 +293,9 @@
     </div>
   </div>
 
-  <!-- Withdraw Modal -->
-  <div id="withdrawModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex flex-col justify-end max-w-md mx-auto transition-all">
-    <div class="glass-card bg-slate-900 p-6 rounded-t-3xl border-t border-slate-700/80 space-y-4 shadow-2xl">
+  <!-- Withdraw Modal (Fixed positioning and bottom alignment) -->
+  <div id="withdrawModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-end justify-center max-w-md mx-auto transition-all">
+    <div class="glass-card bg-slate-900 w-full p-6 rounded-t-3xl border-t border-slate-700/80 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center">
         <div>
           <h3 class="font-extrabold text-base text-white">Withdraw Funds</h3>
@@ -368,7 +343,7 @@
         </div>
       </div>
 
-      <button onclick="submitWithdraw()" class="w-full shimmer-btn py-3.5 rounded-xl font-extrabold text-xs text-white uppercase tracking-wider shadow-xl active:scale-95 transition">
+      <button onclick="submitWithdraw()" class="w-full shimmer-btn py-3.5 rounded-xl font-extrabold text-xs text-white uppercase tracking-wider shadow-xl active:scale-95 transition mb-2">
         Confirm Withdrawal
       </button>
     </div>
@@ -392,8 +367,8 @@
     const HISTORY_KEY = `nexus_user_${currentUserId}_history`;
     const EARNINGS_LOG_KEY = `nexus_user_${currentUserId}_earnings_log`;
     const INVITE_COUNT_KEY = `nexus_user_${currentUserId}_invite_count`;
-    const DAILY_CLAIMED_KEY = `nexus_user_${currentUserId}_daily_claimed`;
-    const LAST_ACTIVE_DATE_KEY = `nexus_user_${currentUserId}_last_active_date`;
+    const DAILY_STREAK_DAY_KEY = `nexus_user_${currentUserId}_streak_day`;
+    const LAST_STREAK_TIME_KEY = `nexus_user_${currentUserId}_last_streak_time`;
 
     let balance = parseInt(localStorage.getItem(BALANCE_KEY)) || 0;
     let todayEarningVal = parseInt(localStorage.getItem(TODAY_KEY)) || 0;
@@ -402,26 +377,32 @@
     let historyRecords = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
     let earningsLogs = JSON.parse(localStorage.getItem(EARNINGS_LOG_KEY)) || [];
     let inviteCount = parseInt(localStorage.getItem(INVITE_COUNT_KEY)) || 0;
-    let isDailyClaimed = localStorage.getItem(DAILY_CLAIMED_KEY) === 'true';
+    
+    // Daily Streak Management (Day 1 to 5)
+    let streakDay = parseInt(localStorage.getItem(DAILY_STREAK_DAY_KEY)) || 1; // 1 to 5 (or 6 means all completed for today/cycle)
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
-    const todayDateStr = new Date().toDateString();
-    if (localStorage.getItem(LAST_ACTIVE_DATE_KEY) !== todayDateStr) {
-      todayEarningVal = 0;
-      isDailyClaimed = false;
-      localStorage.setItem(LAST_ACTIVE_DATE_KEY, todayDateStr);
-      localStorage.setItem(DAILY_CLAIMED_KEY, 'false');
-      localStorage.setItem(TODAY_KEY, 0);
+    // Live Date and Time Loop
+    function updateLiveDateTime() {
+      const now = new Date();
+      const options = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      const timeString = now.toLocaleString('en-US', options);
+      const dateTimeEl = document.getElementById('liveDateTime');
+      if (dateTimeEl) {
+        dateTimeEl.innerText = timeString;
+      }
     }
+    setInterval(updateLiveDateTime, 1000);
 
     window.addEventListener('DOMContentLoaded', () => {
       initTelegramUser();
       updateUI();
       renderHistory();
       checkClaimedTiers();
-      checkDailyStatus();
+      renderStreakUI();
       updateInviteUI();
+      updateLiveDateTime();
 
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
@@ -553,24 +534,74 @@
       });
     }
 
-    function checkDailyStatus() {
-      const day1Card = document.getElementById('day1Card');
-      const day1Text = document.getElementById('day1Text');
-      const day1Icon = document.getElementById('day1Icon');
+    // Dynamic Streak Day Rendering (Day 1 to 5)
+    function renderStreakUI() {
+      const container = document.getElementById('streakDaysContainer');
+      const streakLabel = document.getElementById('streakLabel');
+      if (!container) return;
 
-      if (isDailyClaimed) {
-        if (day1Card) {
-          day1Card.className = "glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-slate-800 bg-slate-900/50 opacity-60 cursor-not-allowed";
-        }
-        if (day1Text) day1Text.innerText = "Claimed";
-        if (day1Icon) day1Icon.className = "fa-solid fa-check text-emerald-400 my-1.5 text-xs";
-      } else {
-        if (day1Card) {
-          day1Card.className = "glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-indigo-500/60 bg-indigo-500/10 shadow-lg ring-1 ring-indigo-500/50 cursor-pointer active:scale-95 transition";
-        }
-        if (day1Text) day1Text.innerText = "🥇 Day 1";
-        if (day1Icon) day1Icon.className = "fa-solid fa-gift text-indigo-400 my-1.5 text-xs";
+      const rewards = [
+        { day: 1, amount: 50, icon: 'fa-gift' },
+        { day: 2, amount: 100, icon: 'fa-gift' },
+        { day: 3, amount: 200, icon: 'fa-gift' },
+        { day: 4, amount: 300, icon: 'fa-gift' },
+        { day: 5, amount: 500, icon: 'fa-box-archive' },
+      ];
+
+      if (streakLabel) {
+        streakLabel.innerText = `Day ${Math.min(streakDay, 5)} / 5`;
       }
+
+      container.innerHTML = rewards.map(item => {
+        let isClaimed = item.day < streakDay;
+        let isCurrent = item.day === streakDay;
+
+        if (isClaimed) {
+          return `
+            <div class="glass-card p-2 rounded-2xl flex flex-col items-center justify-center border-slate-800 bg-slate-900/50 opacity-60 cursor-not-allowed">
+              <span class="text-[9px] text-slate-400 font-semibold">Day ${item.day}</span>
+              <i class="fa-solid fa-check text-emerald-400 my-1.5 text-xs"></i>
+              <span class="text-[9px] font-bold text-slate-400">+${item.amount}</span>
+            </div>`;
+        } else if (isCurrent) {
+          return `
+            <div onclick="claimStreak(${item.day}, ${item.amount})" class="glass-card p-2 rounded-2xl flex flex-col items-center justify-center border-indigo-500/60 bg-indigo-500/10 shadow-lg ring-1 ring-indigo-500/50 cursor-pointer active:scale-95 transition">
+              <span class="text-[9px] text-indigo-300 font-semibold">Day ${item.day}</span>
+              <i class="fa-solid fa-gift text-indigo-400 my-1.5 text-xs animate-bounce"></i>
+              <span class="text-[9px] font-bold text-white">+${item.amount}</span>
+            </div>`;
+        } else {
+          return `
+            <div class="glass-card p-2 rounded-2xl flex flex-col items-center justify-center opacity-40 cursor-not-allowed">
+              <span class="text-[9px] text-slate-400 font-medium">Day ${item.day}</span>
+              <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
+              <span class="text-[9px] font-bold text-slate-400">+${item.amount}</span>
+            </div>`;
+        }
+      }).join('');
+    }
+
+    function claimStreak(day, amount) {
+      const lastClaimDate = localStorage.getItem(LAST_STREAK_TIME_KEY);
+      const todayStr = new Date().toDateString();
+
+      if (lastClaimDate === todayStr) {
+        alert("You have already claimed today's reward. Come back tomorrow for the next day!");
+        return;
+      }
+
+      balance += amount;
+      todayEarningVal += amount;
+      streakDay = day + 1;
+
+      localStorage.setItem(DAILY_STREAK_DAY_KEY, streakDay);
+      localStorage.setItem(LAST_STREAK_TIME_KEY, todayStr);
+
+      updateUI();
+      renderStreakUI();
+      addEarningsLog(amount, `Day ${day} Streak Reward`);
+
+      alert(`🎉 Successfully claimed Day ${day} reward (+${amount} MMK)!`);
     }
 
     function addEarningsLog(amount, sourceText) {
@@ -587,24 +618,6 @@
       earningsLogs.unshift(logItem);
       localStorage.setItem(EARNINGS_LOG_KEY, JSON.stringify(earningsLogs));
       renderHistory();
-    }
-
-    function claimDaily() {
-      if (isDailyClaimed) {
-        alert("Daily reward already claimed for today.");
-        return;
-      }
-
-      balance += 50;
-      todayEarningVal += 50;
-      isDailyClaimed = true;
-
-      localStorage.setItem(DAILY_CLAIMED_KEY, 'true');
-      updateUI();
-      checkDailyStatus();
-      addEarningsLog(50, 'Daily Streak Reward');
-
-      alert("🎉 Successfully claimed Day 1 reward (+50 MMK)!");
     }
 
     function switchTab(tab) {

@@ -375,13 +375,28 @@
   </div>
 
   <script>
-    let balance = parseInt(localStorage.getItem('nexus_v3_balance')) || 0;
-    let todayEarningVal = parseInt(localStorage.getItem('nexus_v3_today')) || 0;
-    let completedAds = parseInt(localStorage.getItem('nexus_v3_completed_ads')) || 0;
-    let claimedTiers = JSON.parse(localStorage.getItem('nexus_v3_claimed_tiers')) || [];
-    let historyRecords = JSON.parse(localStorage.getItem('nexus_v3_history')) || [];
-    let inviteCount = parseInt(localStorage.getItem('nexus_v3_invite_count')) || 0;
-    let isDailyClaimed = localStorage.getItem('nexus_v3_daily_claimed') === 'true';
+    // User ID ကို ဦးစွာဖမ်းယူ၍ Account များကို သီးသန့်ခွဲထုတ်ခြင်း
+    let currentUserId = 'guest';
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+      currentUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
+    }
+
+    // User ID အလိုက် LocalStorage Keys များကို သီးသန့်သတ်မှတ်ခြင်း
+    const BALANCE_KEY = `nexus_user_${currentUserId}_balance`;
+    const TODAY_KEY = `nexus_user_${currentUserId}_today`;
+    const COMPLETED_ADS_KEY = `nexus_user_${currentUserId}_completed_ads`;
+    const CLAIMED_TIERS_KEY = `nexus_user_${currentUserId}_claimed_tiers`;
+    const HISTORY_KEY = `nexus_user_${currentUserId}_history`;
+    const INVITE_COUNT_KEY = `nexus_user_${currentUserId}_invite_count`;
+    const DAILY_CLAIMED_KEY = `nexus_user_${currentUserId}_daily_claimed`;
+
+    let balance = parseInt(localStorage.getItem(BALANCE_KEY)) || 0;
+    let todayEarningVal = parseInt(localStorage.getItem(TODAY_KEY)) || 0;
+    let completedAds = parseInt(localStorage.getItem(COMPLETED_ADS_KEY)) || 0;
+    let claimedTiers = JSON.parse(localStorage.getItem(CLAIMED_TIERS_KEY)) || [];
+    let historyRecords = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    let inviteCount = parseInt(localStorage.getItem(INVITE_COUNT_KEY)) || 0;
+    let isDailyClaimed = localStorage.getItem(DAILY_CLAIMED_KEY) === 'true';
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
@@ -426,16 +441,13 @@
     function sendAdminNotification(user) {
       const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
       const adminChatId = "5906985877";
-
-      // Username အမှန်ကို အမြဲတမ်း ပုံသေဖော်ပြပေးမည်
       const currentUsername = '@P_h_y_o_W_a_i_A_u_n_g';
 
-          const message = `🔔 *New Bot User Started!*\n\n` +
-                    `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
-                    `🆔 Username: ${currentUsername}\n` +
-                    `📌 User ID: \`${user.id}\`\n` +
-                    `🌐 Language: ${user.language_code || 'en'}`;
-      
+      const message = `🔔 *New Bot User Started!*\n\n` +
+                      `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
+                      `🆔 Username: ${currentUsername}\n` +
+                      `📌 User ID: \`${user.id}\`\n` +
+                      `🌐 Language: ${user.language_code || 'en'}`;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
@@ -465,26 +477,29 @@
         progressBarEl.style.width = `${progressPercent}%`;
       }
 
-      localStorage.setItem('nexus_v3_balance', balance);
-      localStorage.setItem('nexus_v3_today', todayEarningVal);
-      localStorage.setItem('nexus_v3_completed_ads', completedAds);
+      localStorage.setItem(BALANCE_KEY, balance);
+      localStorage.setItem(TODAY_KEY, todayEarningVal);
+      localStorage.setItem(COMPLETED_ADS_KEY, completedAds);
     }
 
     function updateInviteUI() {
       const inviteCountEl = document.getElementById('inviteCount');
       if (inviteCountEl) inviteCountEl.innerText = inviteCount;
-      localStorage.setItem('nexus_v3_invite_count', inviteCount);
+      localStorage.setItem(INVITE_COUNT_KEY, inviteCount);
     }
 
     function checkClaimedTiers() {
       [1, 2, 3, 4].forEach(tier => {
+        const btn = document.getElementById(`btn_tier${tier}`);
+        if (!btn) return;
         if (claimedTiers.includes(tier)) {
-          const btn = document.getElementById(`btn_tier${tier}`);
-          if (btn) {
-            btn.disabled = true;
-            btn.innerText = "Claimed";
-            btn.className = "bg-slate-800 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-xl cursor-not-allowed";
-          }
+          btn.disabled = true;
+          btn.innerText = "Claimed";
+          btn.className = "bg-slate-800 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-xl cursor-not-allowed";
+        } else {
+          btn.disabled = false;
+          btn.innerText = "Claim";
+          btn.className = "bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95";
         }
       });
     }
@@ -500,6 +515,12 @@
         }
         if (day1Text) day1Text.innerText = "Claimed";
         if (day1Icon) day1Icon.className = "fa-solid fa-check text-emerald-400 my-1.5 text-xs";
+      } else {
+        if (day1Card) {
+          day1Card.className = "glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-indigo-500/60 bg-indigo-500/10 shadow-lg ring-1 ring-indigo-500/50 cursor-pointer active:scale-95 transition";
+        }
+        if (day1Text) day1Text.innerText = "🥇 Day 1";
+        if (day1Icon) day1Icon.className = "fa-solid fa-gift text-indigo-400 my-1.5 text-xs";
       }
     }
 
@@ -513,7 +534,7 @@
       todayEarningVal += 50;
       isDailyClaimed = true;
 
-      localStorage.setItem('nexus_v3_daily_claimed', 'true');
+      localStorage.setItem(DAILY_CLAIMED_KEY, 'true');
       updateUI();
       checkDailyStatus();
 
@@ -574,7 +595,7 @@
       todayEarningVal += rewardAmount;
       claimedTiers.push(tierId);
 
-      localStorage.setItem('nexus_v3_claimed_tiers', JSON.stringify(claimedTiers));
+      localStorage.setItem(CLAIMED_TIERS_KEY, JSON.stringify(claimedTiers));
       updateUI();
       checkClaimedTiers();
 
@@ -631,7 +652,7 @@
       };
 
       historyRecords.unshift(newRecord);
-      localStorage.setItem('nexus_v3_history', JSON.stringify(historyRecords));
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(historyRecords));
 
       updateUI();
       renderHistory();

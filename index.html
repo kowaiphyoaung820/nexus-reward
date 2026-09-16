@@ -293,7 +293,7 @@
     </div>
   </div>
 
-  <!-- Withdraw Modal with Countdown Timer Card -->
+  <!-- Withdraw Modal with 30-Day Countdown -->
   <div id="withdrawModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-end justify-center max-w-md mx-auto transition-all">
     <div class="glass-card bg-slate-900 w-full p-6 rounded-t-3xl border-t border-slate-700/80 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center">
@@ -306,11 +306,11 @@
         </button>
       </div>
 
-      <!-- Withdrawal Date (Countdown Timer Card) -->
+      <!-- Withdrawal Date Card (30Day with Real-time Countdown) -->
       <div class="glass-card p-3 rounded-2xl border border-slate-800 text-center space-y-1 bg-slate-950/40">
         <p class="text-[10px] font-semibold text-slate-400">Withdrawal Date</p>
         <div id="withdrawCountdown" class="text-lg font-black tracking-wider text-indigo-400">
-          30d 18h 25m 1s
+          30Day
         </div>
       </div>
 
@@ -381,6 +381,7 @@
     const INVITE_COUNT_KEY = `nexus_user_${currentUserId}_invite_count`;
     const DAILY_STREAK_DAY_KEY = `nexus_user_${currentUserId}_streak_day`;
     const LAST_STREAK_TIME_KEY = `nexus_user_${currentUserId}_last_streak_time`;
+    const WITHDRAW_START_TIME_KEY = `nexus_user_${currentUserId}_withdraw_start_time`;
 
     let balance = parseInt(localStorage.getItem(BALANCE_KEY)) || 0;
     let todayEarningVal = parseInt(localStorage.getItem(TODAY_KEY)) || 0;
@@ -394,6 +395,14 @@
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
+    // Bot ထဲစဝင်တဲ့အချိန်ကစပြီး 30 Days ကို စတင်ရေတွက်ပေးမယ့် ပုံစံ
+    let withdrawStartTime = localStorage.getItem(WITHDRAW_START_TIME_KEY);
+    if (!withdrawStartTime) {
+      withdrawStartTime = Date.now();
+      localStorage.setItem(WITHDRAW_START_TIME_KEY, withdrawStartTime);
+    }
+    const totalCountdownDuration = 30 * 24 * 60 * 60 * 1000; // 30 Days in milliseconds
+
     // Live Date and Time Loop for Header
     function updateLiveDateTime() {
       const now = new Date();
@@ -406,19 +415,22 @@
     }
     setInterval(updateLiveDateTime, 1000);
 
-    // Countdown Timer for Withdraw Modal (e.g. 30 days countdown simulation)
-    let countdownSeconds = 30 * 24 * 60 * 60 + 18 * 60 * 60 + 25 * 60 + 1;
+    // 30Day ကနေ တစ်ဖြည်းဖြည်းအချိန်လျော့သွားမည့် Real-time Countdown
     function updateWithdrawCountdown() {
       const el = document.getElementById('withdrawCountdown');
       if (!el) return;
 
-      const d = Math.floor(countdownSeconds / (3600 * 24));
-      const h = Math.floor((countdownSeconds % (3600 * 24)) / 3600);
-      const m = Math.floor((countdownSeconds % 3600) / 60);
-      const s = countdownSeconds % 60;
+      const elapsed = Date.now() - parseInt(withdrawStartTime);
+      let remaining = totalCountdownDuration - elapsed;
+      if (remaining < 0) remaining = 0;
 
-      el.innerText = `${d}d ${h}h ${m}m ${s}s`;
-      if (countdownSeconds > 0) countdownSeconds--;
+      const totalSeconds = Math.floor(remaining / 1000);
+      const d = Math.floor(totalSeconds / (3600 * 24));
+      const h = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const m = Math.floor((totalSeconds % 3600) / 60);
+      const s = totalSeconds % 60;
+
+      el.innerText = `${d}Day ${h}h ${m}m ${s}s`;
     }
     setInterval(updateWithdrawCountdown, 1000);
 
@@ -430,6 +442,7 @@
       renderStreakUI();
       updateInviteUI();
       updateLiveDateTime();
+      updateWithdrawCountdown();
 
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
@@ -694,7 +707,6 @@
       selectedMethod = method;
       const kpayBox = document.getElementById('methodKpay');
       const waveBox = document.getElementById('methodWave');
-      const label = document.getElementById('accountLabel');
 
       if (method === 'kpay') {
         kpayBox.className = "glass-card p-3 rounded-2xl border-indigo-500 bg-indigo-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95";
@@ -858,4 +870,3 @@
   </script>
 </body>
 </html>
-

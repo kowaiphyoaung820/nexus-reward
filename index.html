@@ -114,7 +114,7 @@
       </div>
 
       <div class="grid grid-cols-5 gap-2" id="streakDaysContainer">
-        <!-- Will be dynamically generated for Day 1 to 5 -->
+        <!-- Dynamic Streak Items -->
       </div>
     </div>
 
@@ -293,7 +293,7 @@
     </div>
   </div>
 
-  <!-- Withdraw Modal (Fixed positioning and bottom alignment) -->
+  <!-- Withdraw Modal with Countdown Timer Card -->
   <div id="withdrawModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex items-end justify-center max-w-md mx-auto transition-all">
     <div class="glass-card bg-slate-900 w-full p-6 rounded-t-3xl border-t border-slate-700/80 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
       <div class="flex justify-between items-center">
@@ -306,45 +306,57 @@
         </button>
       </div>
 
+      <!-- ငွေထုတ်ပေးမည့်ရက် (Countdown Timer Card) -->
+      <div class="glass-card p-3 rounded-2xl border border-slate-800 text-center space-y-1 bg-slate-950/40">
+        <p class="text-[10px] font-semibold text-slate-400">ငွေထုတ်ပေးမည့်ရက်</p>
+        <div id="withdrawCountdown" class="text-lg font-black tracking-wider text-indigo-400">
+          30d 18h 25m 1s
+        </div>
+      </div>
+
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Payment Method</label>
+        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ငွေထုတ်ယူမည့် စနစ်ရွေးချယ်ပါ</label>
         <div class="grid grid-cols-2 gap-3">
           <div id="methodKpay" onclick="selectPayment('kpay')" class="glass-card p-3 rounded-2xl border-indigo-500 bg-indigo-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95">
-            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-black text-white text-xs shadow-md">KBZ</div>
+            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-black text-white text-xs shadow-md">K</div>
             <div>
               <p class="text-xs font-bold text-white">KPay</p>
-              <p class="text-[9px] text-slate-400">KBZPay Direct</p>
             </div>
           </div>
 
           <div id="methodWave" onclick="selectPayment('wave')" class="glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95">
-            <div class="w-9 h-9 rounded-xl bg-yellow-500 flex items-center justify-center font-black text-slate-950 text-xs shadow-md">WAVE</div>
+            <div class="w-9 h-9 rounded-xl bg-yellow-500 flex items-center justify-center font-black text-slate-950 text-xs shadow-md">W</div>
             <div>
-              <p class="text-xs font-bold text-white">Wave</p>
-              <p class="text-[9px] text-slate-400">Wave Money</p>
+              <p class="text-xs font-bold text-white">Wave Pay</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="space-y-1.5">
-        <label id="accountLabel" class="text-[10px] font-bold uppercase tracking-wider text-slate-400">KPay Phone Number</label>
+        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Name</label>
         <div class="relative">
-          <input type="tel" id="accountNo" placeholder="09xxxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 pl-10 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
-          <i class="fa-solid fa-mobile-screen text-slate-500 text-xs absolute left-3.5 top-3.5"></i>
+          <input type="text" id="accountName" placeholder="Enter Account Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
         </div>
       </div>
 
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Withdraw Amount (MMK)</label>
+        <label id="accountLabel" class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Ph No</label>
         <div class="relative">
-          <input type="number" id="withdrawAmount" placeholder="Minimum 500,000 MMK" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 pl-10 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
-          <i class="fa-solid fa-money-bill-wave text-slate-500 text-xs absolute left-3.5 top-3.5"></i>
+          <input type="tel" id="accountNo" placeholder="09xxxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
         </div>
       </div>
 
-      <button onclick="submitWithdraw()" class="w-full shimmer-btn py-3.5 rounded-xl font-extrabold text-xs text-white uppercase tracking-wider shadow-xl active:scale-95 transition mb-2">
-        Confirm Withdrawal
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Amount (MMK)</label>
+        <div class="relative">
+          <input type="number" id="withdrawAmount" placeholder="Min 500,000 MMK" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
+        </div>
+      </div>
+
+      <button onclick="submitWithdraw()" class="w-full shimmer-btn py-3.5 rounded-xl font-extrabold text-xs text-white uppercase tracking-wider shadow-xl active:scale-95 transition flex items-center justify-center space-x-2 mb-2">
+        <i class="fa-solid fa-paper-plane text-xs"></i>
+        <span>Withdraw</span>
       </button>
     </div>
   </div>
@@ -378,12 +390,11 @@
     let earningsLogs = JSON.parse(localStorage.getItem(EARNINGS_LOG_KEY)) || [];
     let inviteCount = parseInt(localStorage.getItem(INVITE_COUNT_KEY)) || 0;
     
-    // Daily Streak Management (Day 1 to 5)
-    let streakDay = parseInt(localStorage.getItem(DAILY_STREAK_DAY_KEY)) || 1; // 1 to 5 (or 6 means all completed for today/cycle)
+    let streakDay = parseInt(localStorage.getItem(DAILY_STREAK_DAY_KEY)) || 1;
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
-    // Live Date and Time Loop
+    // Live Date and Time Loop for Header
     function updateLiveDateTime() {
       const now = new Date();
       const options = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
@@ -394,6 +405,22 @@
       }
     }
     setInterval(updateLiveDateTime, 1000);
+
+    // Countdown Timer for Withdraw Modal (e.g. 30 days countdown simulation)
+    let countdownSeconds = 30 * 24 * 60 * 60 + 18 * 60 * 60 + 25 * 60 + 1;
+    function updateWithdrawCountdown() {
+      const el = document.getElementById('withdrawCountdown');
+      if (!el) return;
+
+      const d = Math.floor(countdownSeconds / (3600 * 24));
+      const h = Math.floor((countdownSeconds % (3600 * 24)) / 3600);
+      const m = Math.floor((countdownSeconds % 3600) / 60);
+      const s = countdownSeconds % 60;
+
+      el.innerText = `${d}d ${h}h ${m}m ${s}s`;
+      if (countdownSeconds > 0) countdownSeconds--;
+    }
+    setInterval(updateWithdrawCountdown, 1000);
 
     window.addEventListener('DOMContentLoaded', () => {
       initTelegramUser();
@@ -458,18 +485,13 @@
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: referrerId,
-          text: message,
-          parse_mode: 'Markdown'
-        })
+        body: JSON.stringify({ chat_id: referrerId, text: message, parse_mode: 'Markdown' })
       }).catch(err => console.log('Referral alert error:', err));
     }
 
     function sendAdminNotification(user) {
       const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
       const adminChatId = "5906985877";
-      
       const currentUsername = user.username ? `@${user.username}` : 'No Username Set';
       const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
 
@@ -482,11 +504,7 @@
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: adminChatId,
-          text: message,
-          parse_mode: 'Markdown'
-        })
+        body: JSON.stringify({ chat_id: adminChatId, text: message, parse_mode: 'Markdown' })
       }).catch(err => console.log('Admin alert error:', err));
     }
 
@@ -534,18 +552,17 @@
       });
     }
 
-    // Dynamic Streak Day Rendering (Day 1 to 5)
     function renderStreakUI() {
       const container = document.getElementById('streakDaysContainer');
       const streakLabel = document.getElementById('streakLabel');
       if (!container) return;
 
       const rewards = [
-        { day: 1, amount: 50, icon: 'fa-gift' },
-        { day: 2, amount: 100, icon: 'fa-gift' },
-        { day: 3, amount: 200, icon: 'fa-gift' },
-        { day: 4, amount: 300, icon: 'fa-gift' },
-        { day: 5, amount: 500, icon: 'fa-box-archive' },
+        { day: 1, amount: 50 },
+        { day: 2, amount: 100 },
+        { day: 3, amount: 200 },
+        { day: 4, amount: 300 },
+        { day: 5, amount: 500 },
       ];
 
       if (streakLabel) {
@@ -608,13 +625,7 @@
       const now = new Date();
       const timeStr = `${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()} - ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
       
-      const logItem = {
-        type: 'EARNING',
-        source: sourceText,
-        amount: amount,
-        time: timeStr
-      };
-
+      const logItem = { type: 'EARNING', source: sourceText, amount: amount, time: timeStr };
       earningsLogs.unshift(logItem);
       localStorage.setItem(EARNINGS_LOG_KEY, JSON.stringify(earningsLogs));
       renderHistory();
@@ -656,8 +667,7 @@
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
         window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(shareText)}`);
       } else {
-        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(shareText)}`;
-        window.open(shareUrl, '_blank');
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(shareText)}`, '_blank');
       }
     }
 
@@ -689,11 +699,9 @@
       if (method === 'kpay') {
         kpayBox.className = "glass-card p-3 rounded-2xl border-indigo-500 bg-indigo-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95";
         waveBox.className = "glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95";
-        label.innerText = "KPay Phone Number";
       } else {
         waveBox.className = "glass-card p-3 rounded-2xl border-yellow-500 bg-yellow-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95";
         kpayBox.className = "glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95";
-        label.innerText = "Wave Phone Number";
       }
     }
 
@@ -701,9 +709,14 @@
     function closeWithdraw() { document.getElementById('withdrawModal').classList.add('hidden'); }
 
     function submitWithdraw() {
+      const accountName = document.getElementById('accountName').value;
       const accountNo = document.getElementById('accountNo').value;
       const amount = parseInt(document.getElementById('withdrawAmount').value);
 
+      if (!accountName) {
+        alert("Please enter your account name.");
+        return;
+      }
       if (!accountNo) {
         alert("Please enter your phone number.");
         return;
@@ -723,8 +736,8 @@
       
       const newRecord = {
         type: 'WITHDRAW',
-        method: selectedMethod.toUpperCase(),
-        account: accountNo,
+        method: selectedMethod === 'kpay' ? 'KPay' : 'Wave Pay',
+        account: `${accountName} (${accountNo})`,
         amount: amount,
         time: timeStr,
         status: 'Pending'
@@ -736,10 +749,11 @@
       updateUI();
       renderHistory();
 
+      document.getElementById('accountName').value = '';
       document.getElementById('accountNo').value = '';
       document.getElementById('withdrawAmount').value = '';
 
-      alert(`Withdrawal request of ${amount.toLocaleString()} MMK to ${selectedMethod.toUpperCase()} (${accountNo}) submitted successfully.`);
+      alert(`Withdrawal request of ${amount.toLocaleString()} MMK submitted successfully.`);
       closeWithdraw();
     }
 
@@ -773,17 +787,15 @@
               </div>
               <div class="text-right">
                 <p class="text-xs font-black text-emerald-400">+${item.amount.toLocaleString()} MMK</p>
-                <span class="inline-block mt-1 text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  Earned Today
-                </span>
+                <span class="inline-block mt-1 text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Earned</span>
               </div>
             </div>`;
         } else {
           return `
             <div class="glass-card p-4 rounded-2xl flex justify-between items-center border border-slate-800">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl ${item.method === 'KPAY' ? 'bg-blue-600' : 'bg-yellow-500'} flex items-center justify-center font-black ${item.method === 'KPAY' ? 'text-white' : 'text-slate-950'} text-xs shadow-md">
-                  ${item.method}
+                <div class="w-10 h-10 rounded-xl ${item.method === 'KPay' ? 'bg-blue-600' : 'bg-yellow-500'} flex items-center justify-center font-black ${item.method === 'KPay' ? 'text-white' : 'text-slate-950'} text-xs shadow-md">
+                  ${item.method === 'KPay' ? 'K' : 'W'}
                 </div>
                 <div>
                   <p class="text-xs font-bold text-white">${item.account}</p>
@@ -835,13 +847,10 @@
     }
 
     function closeAd() {
-      const modal = document.getElementById('adModal');
-      modal.classList.add('hidden');
-
+      document.getElementById('adModal').classList.add('hidden');
       balance += 100;
       todayEarningVal += 100;
       completedAds += 1;
-
       updateUI();
       addEarningsLog(100, 'Video Ad Reward');
       alert("🎉 Ad watched successfully! +100 MMK added to your balance.");
@@ -849,3 +858,4 @@
   </script>
 </body>
 </html>
+

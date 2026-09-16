@@ -217,7 +217,7 @@
         </button>
       </div>
 
-      <!-- Task 3 (Invite Friend - Non-Claimable Direct Reward) -->
+      <!-- Task 3 (Invite Friend - Telegram Direct Share Popup) -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
@@ -228,7 +228,7 @@
             <p class="text-[10px] text-slate-400 mt-0.5">+1,000 MMK per active referral</p>
           </div>
         </div>
-        <button onclick="inviteFriend()" class="bg-slate-800 hover:bg-slate-700 text-indigo-400 border border-indigo-500/30 text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+        <button onclick="inviteFriend()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
           Invite
         </button>
       </div>
@@ -491,12 +491,14 @@
 
     function inviteFriend() {
       const botUrl = "https://t.me/NexusReward_Official_Bot";
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(botUrl).then(() => {
-          alert("✨ ဖိတ်ခေါ်သည့် Bot Link ကူးယူပြီးပါပြီ။ သူငယ်ချင်းများထံ မျှဝေပါ (+1,000 MMK per referral)။");
-        });
+      const shareText = "⚡ NEXUS Rewards App မှာ ငွေတွေ အတူတူရှာကြစို့! အခုပဲ ဝင်ရောက်ဆော့ကစားလိုက်ပါ 👇\n" + botUrl;
+      
+      // Telegram WebApp native share popup if available, fallback to standard share/clipboard
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(botUrl)}&text=${encodeURIComponent(shareText)}`);
       } else {
-        alert("Bot Link: " + botUrl);
+        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(botUrl)}&text=${encodeURIComponent(shareText)}`;
+        window.open(shareUrl, '_blank');
       }
     }
 

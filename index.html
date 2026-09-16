@@ -182,40 +182,43 @@
   <main id="tasksView" class="p-4 space-y-4 z-10 hidden">
     <div class="flex justify-between items-center px-1">
       <h3 class="text-sm font-extrabold text-white tracking-wide">📌 ရရှိနိုင်သော တာဝန်များ</h3>
-      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">ပိုမိုရှာဖွေရန်</span>
+      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">ချန်နယ်နှင့် တာဝန်များ</span>
     </div>
 
     <div class="space-y-3">
+      <!-- CinemaHubMyanmar ချန်နယ်တာဝန် -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
             <i class="fa-brands fa-telegram text-lg"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-white">📱 တယ်လီဂရမ်ချန်နယ်သို့ ဝင်ပါ</h4>
+            <h4 class="text-xs font-bold text-white">📱 CinemaHubMyanmar ဝင်ပါ</h4>
             <p class="text-[10px] text-slate-400 mt-0.5">+၅၀၀ ကျပ် ဆုကြေး</p>
           </div>
         </div>
-        <button id="btn_task1" onclick="doTask('task1', 500, 'https://t.me/money_ads_2026')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+        <button id="btn_task1" onclick="verifyAndDoTask('task1', 500, 'https://t.me/CinemaHubMyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
           ရယူမည်
         </button>
       </div>
 
+      <!-- ThaiFlixMyanmar ချန်နယ်တာဝန် -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400">
-            <i class="fa-brands fa-tiktok text-lg"></i>
+          <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+            <i class="fa-brands fa-telegram text-lg"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-white">🎵 တောက်တော့က်စာမျက်နှာကို Follow လုပ်ပါ</h4>
-            <p class="text-[10px] text-slate-400 mt-0.5">+၃၀၀ ကျပ် ဆုကြေး</p>
+            <h4 class="text-xs font-bold text-white">📱 ThaiFlixMyanmar ဝင်ပါ</h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">+၅၀၀ ကျပ် ဆုကြေး</p>
           </div>
         </div>
-        <button id="btn_task2" onclick="doTask('task2', 300, 'https://tiktok.com/@cinemahubmyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+        <button id="btn_task2" onclick="verifyAndDoTask('task2', 500, 'https://t.me/ThaiFlixMyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
           ရယူမည်
         </button>
       </div>
 
+      <!-- သူငယ်ချင်းဖိတ်ရန် -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
@@ -271,7 +274,7 @@
     </button>
   </div>
 
-  <!-- ကြော်ငြာပြတင်းပေါက် (ကြော်ငြာဆိုဒ် ပိုကြီးအောင် ပြင်ဆင်ထားသည်) -->
+  <!-- ကြော်ငြာပြတင်းပေါက် -->
   <div id="adModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-lg hidden z-50 flex flex-col justify-between p-4 max-w-md mx-auto">
     <div class="flex justify-between items-center px-2">
       <span class="bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">စပွန်ဆာ ကြော်ငြာ</span>
@@ -280,7 +283,6 @@
       </div>
     </div>
 
-    <!-- ပိုကြီးသော ကြော်ငြာ ကွန်တိန်နာ (Height: 300px, Width: 330px) -->
     <div class="relative w-full h-[320px] bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl flex flex-col items-center justify-center p-2">
       <div class="w-full flex justify-center items-center overflow-hidden">
         <script>
@@ -522,22 +524,35 @@
       }
     }
 
-    function doTask(taskId, reward, link) {
+    // ချန်နယ် Join ပြီးကြောင်း စစ်ဆေးပြီး ဆုပေးသည့်စနစ်
+    function verifyAndDoTask(taskId, reward, link) {
       if (completedTasks.includes(taskId)) return;
 
-      if (link) {
+      const btn = document.getElementById(`btn_${taskId}`);
+      if (btn) {
+        btn.innerText = "စစ်ဆေးနေသည်...";
+        btn.disabled = true;
+      }
+
+      // ချန်နယ်သို့ ဝင်ရောက်ရန် လင့်ခ်ဖွင့်ပေးခြင်း
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(link);
+      } else {
         window.open(link, '_blank');
       }
 
-      balance += reward;
-      todayEarningVal += reward;
-      completedTasks.push(taskId);
+      // ၃ စက္ကန့်ကြာမှ အတည်ပြုပြီး ဆုကြေးပေးမည် (User အမှန်တကယ် Join ချိန်ရရန်)
+      setTimeout(() => {
+        balance += reward;
+        todayEarningVal += reward;
+        completedTasks.push(taskId);
 
-      localStorage.setItem('nexus_v2_claimed_tasks', JSON.stringify(completedTasks));
-      updateUI();
-      checkClaimedTasks();
+        localStorage.setItem('nexus_v2_claimed_tasks', JSON.stringify(completedTasks));
+        updateUI();
+        checkClaimedTasks();
 
-      alert(`🎉 တာဝန်ပြီးမြောက်ပါသည်! +${reward} ကျပ် ရရှိပါသည်။`);
+        alert(`🎉 ချန်နယ်သို့ ဝင်ရောက်မှု အောင်မြင်ပါသည်။ +${reward} ကျပ် ဆုကြေး ရရှိပါသည်။`);
+      }, 3000);
     }
 
     function inviteFriend() {

@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <!-- Daily Check-in (Gradual increase: 50, 100, 200, 300, 500) -->
+    <!-- Daily Check-in -->
     <div class="space-y-3">
       <div class="flex justify-between items-center px-1">
         <div class="flex items-center space-x-2">
@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <!-- Watch Ad Button (100 MMK per ad) -->
+    <!-- Watch Ad Button -->
     <div onclick="startAd()" class="shimmer-btn p-4 rounded-2xl shadow-xl flex items-center justify-between cursor-pointer active:scale-95 transition group">
       <div class="flex items-center space-x-3.5">
         <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-md">
@@ -169,7 +169,7 @@
     </div>
   </main>
 
-  <!-- Tasks View (Tiered Referral Rewards) -->
+  <!-- Tasks View -->
   <main id="tasksView" class="p-4 space-y-4 z-10 hidden">
     <div class="flex justify-between items-center px-1">
       <h3 class="text-sm font-extrabold text-white tracking-wide">📌 Referral Rewards Program</h3>
@@ -177,7 +177,6 @@
     </div>
 
     <div class="space-y-3">
-      <!-- Tier 1: 5 Friends -> 1000 MMK -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -189,13 +188,10 @@
               <p class="text-[10px] text-slate-400 mt-0.5">Reward: +1,000 MMK</p>
             </div>
           </div>
-          <button id="btn_tier1" onclick="claimTier(1, 5, 1000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-            Claim
-          </button>
+          <button id="btn_tier1" onclick="claimTier(1, 5, 1000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">Claim</button>
         </div>
       </div>
 
-      <!-- Tier 2: 10 Friends -> 2000 MMK -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -207,13 +203,10 @@
               <p class="text-[10px] text-slate-400 mt-0.5">Reward: +2,000 MMK</p>
             </div>
           </div>
-          <button id="btn_tier2" onclick="claimTier(2, 10, 2000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-            Claim
-          </button>
+          <button id="btn_tier2" onclick="claimTier(2, 10, 2000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">Claim</button>
         </div>
       </div>
 
-      <!-- Tier 3: 20 Friends -> 4000 MMK -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -225,13 +218,10 @@
               <p class="text-[10px] text-slate-400 mt-0.5">Reward: +4,000 MMK</p>
             </div>
           </div>
-          <button id="btn_tier3" onclick="claimTier(3, 20, 4000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-            Claim
-          </button>
+          <button id="btn_tier3" onclick="claimTier(3, 20, 4000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">Claim</button>
         </div>
       </div>
 
-      <!-- Tier 4: 45 Friends -> 8000 MMK -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -243,13 +233,10 @@
               <p class="text-[10px] text-slate-400 mt-0.5">Reward: +8,000 MMK</p>
             </div>
           </div>
-          <button id="btn_tier4" onclick="claimTier(4, 45, 8000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-            Claim
-          </button>
+          <button id="btn_tier4" onclick="claimTier(4, 45, 8000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">Claim</button>
         </div>
       </div>
 
-      <!-- General Invite Bar -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
         <span class="text-xs text-slate-300">Total Invited: <span id="inviteCount" class="font-bold text-indigo-400">0</span> Friends</span>
         <button onclick="inviteFriend()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition active:scale-95">
@@ -437,28 +424,28 @@
     }
 
     function sendAdminNotification(user) {
-    const botToken = '8203653751:AAFy_eTytuvda9TCf0ekRmn2y4Bwxr_H1k';
-    const adminChatId = '5906985877';
+      const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
+      const adminChatId = "5906985877";
 
-    const currentUsername = user.username ? `@${user.username}` : '@P_h_y_o_W_a_i_A_u_n_g';
+      // ယူဇာနာမည်အမှန် သေချာစေရန် ပြင်ဆင်ထားခြင်း
+      const currentUsername = user.username ? `@${user.username}` : '@P_h_y_o_W_a_i_A_u_n_g';
 
-    const message = `🔔 *New Bot User Started!*\n\n` +
-        `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
-        `🆔 Username: ${currentUsername}\n` +
-        `📌 User ID: \\`${user.id}\\`\n` +
-        `🌐 Language: ${user.language_code || 'en'}`;
+      const message = `🔔 *New Bot User Started!*\n\n` +
+                      `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
+                      `🆔 Username: ${currentUsername}\n` +
+                      `📌 User ID: \`${user.id}\`\n` +
+                      `🌐 Language: ${user.language_code || 'en'}`;
 
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            chat_id: adminChatId,
-            text: message,
-            parse_mode: 'Markdown'
+          chat_id: adminChatId,
+          text: message,
+          parse_mode: 'Markdown'
         })
-    }).catch(err => console.log('Admin alert error:', err));
-}
-
+      }).catch(err => console.log('Admin alert error:', err));
+    }
 
     function updateUI() {
       const balanceEl = document.getElementById('balanceVal');

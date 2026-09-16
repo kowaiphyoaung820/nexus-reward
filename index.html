@@ -375,13 +375,11 @@
   </div>
 
   <script>
-    // User ID ကို ဦးစွာဖမ်းယူ၍ Account များကို သီးသန့်ခွဲထုတ်ခြင်း
     let currentUserId = 'guest';
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
       currentUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
     }
 
-    // User ID အလိုက် LocalStorage Keys များကို သီးသန့်သတ်မှတ်ခြင်း
     const BALANCE_KEY = `nexus_user_${currentUserId}_balance`;
     const TODAY_KEY = `nexus_user_${currentUserId}_today`;
     const COMPLETED_ADS_KEY = `nexus_user_${currentUserId}_completed_ads`;
@@ -442,11 +440,12 @@
       const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
       const adminChatId = "5906985877";
       
-      // User ထံမှ Username အမှန်ကို ရယူမည် (မရှိပါက Name သို့မဟုတ် No Username ဟုပြမည်)
-      const currentUsername = user.username ? `@${user.username}` : (user.first_name || 'No Username');
+      // Username တကယ်ရှိမှ @ နဲ့ပြမယ်၊ မရှိရင် No Username Set လို့ပြမယ်
+      const currentUsername = user.username ? `@${user.username}` : 'No Username Set';
+      const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
 
       const message = `🔔 *New Bot User Started!*\n\n` +
-                      `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
+                      `👤 Name: ${fullName}\n` +
                       `🆔 Username: ${currentUsername}\n` +
                       `📌 User ID: \`${user.id}\`\n` +
                       `🌐 Language: ${user.language_code || 'en'}`;

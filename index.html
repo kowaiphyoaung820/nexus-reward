@@ -253,7 +253,6 @@
       <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">Live Update</span>
     </div>
 
-    <!-- Sub tabs or sections for history -->
     <div class="space-y-3" id="historyList">
       <div id="emptyHistory" class="text-center py-12 space-y-2">
         <i class="fa-solid fa-receipt text-slate-700 text-4xl"></i>
@@ -407,7 +406,6 @@
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
-    // Reset today earnings if it's a new day
     const todayDateStr = new Date().toDateString();
     if (localStorage.getItem(LAST_ACTIVE_DATE_KEY) !== todayDateStr) {
       todayEarningVal = 0;
@@ -450,11 +448,9 @@
             userAvatarEl.src = user.photo_url;
           }
 
-          // Check if user started with referral parameter
           const startParam = tg.initDataUnsafe.start_param;
           if (startParam && startParam.startsWith('ref_')) {
             const referrerId = startParam.replace('ref_', '');
-            // Notify admin or process referral tracking
             notifyReferrerActivity(referrerId, user);
           }
 
@@ -636,7 +632,7 @@
     }
 
     function inviteFriend() {
-      const botUsername = "NexusReward_Official_Bot"; // သင့် Bot username ထည့်ရန်
+      const botUsername = "NexusReward_Official_Bot"; 
       const refLink = `https://t.me/${botUsername}?start=ref_${currentUserId}`;
       const shareText = `⚡ Join NEXUS Rewards & Earn Real MMK! Start now 👇\n` + refLink;
       
@@ -647,8 +643,7 @@
         window.open(shareUrl, '_blank');
       }
 
-      inviteCount += 1;
-      updateInviteUI();
+      // ❌ Share ခလုတ်နှိပ်ရုံနဲ့ လူမတိုးတော့ပါ (အလိုအလျောက်တိုးနေသော ကုဒ်ကို ဖြုတ်လိုက်ပါပြီ)
     }
 
     function claimTier(tierId, requiredCount, rewardAmount) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="my" class="dark">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,32 +9,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-    
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
     .glass-card {
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-
-    .neon-glow {
-      box-shadow: 0 0 35px rgba(99, 102, 241, 0.45);
-    }
-    
+    .neon-glow { box-shadow: 0 0 35px rgba(99, 102, 241, 0.45); }
     .gradient-text {
       background: linear-gradient(135deg, #60A5FA 0%, #A855F7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .shimmer-btn {
       background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
       background-size: 200% auto;
       animation: shimmer 3s linear infinite;
     }
-
     @keyframes shimmer {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -44,7 +36,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 max-w-md mx-auto min-h-screen relative overflow-x-hidden flex flex-col justify-between selection:bg-indigo-500 selection:text-white pb-24">
 
-  <!-- စတင်ဖွင့်ချိန် ပြသရန် -->
+  <!-- Splash Screen -->
   <div id="splashScreen" class="fixed inset-0 bg-slate-950 z-50 flex flex-col items-center justify-center max-w-md mx-auto transition-opacity duration-700 ease-out px-6">
     <div class="text-center flex flex-col items-center justify-center space-y-4">
       <div class="w-24 h-24 bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 rounded-3xl flex items-center justify-center neon-glow shadow-2xl border border-white/10">
@@ -52,16 +44,16 @@
       </div>
       <div class="pt-2">
         <h1 class="text-4xl font-extrabold tracking-tight gradient-text">NEXUS</h1>
-        <p class="text-slate-400 text-[11px] mt-2 tracking-widest uppercase font-semibold">PREMIUM TASK & REWARD SYSTEM</p>
+        <p class="text-slate-400 text-[11px] mt-2 tracking-widest uppercase font-semibold">PREMIUM REWARD SYSTEM</p>
       </div>
       <div class="pt-16 flex flex-col items-center space-y-3">
         <div class="w-7 h-7 border-2 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
-        <p class="text-xs text-slate-400 font-medium tracking-wide">လုံခြုံသော စနစ်သို့ ချိတ်ဆက်နေသည်...</p>
+        <p class="text-xs text-slate-400 font-medium tracking-wide">Connecting to secure network...</p>
       </div>
     </div>
   </div>
 
-  <!-- ထိပ်ပိုင်း အပိုင်း -->
+  <!-- Header -->
   <header class="p-5 flex justify-between items-center z-10 border-b border-slate-800/40 backdrop-blur-md sticky top-0 bg-slate-950/80">
     <div class="flex items-center space-x-3">
       <div class="w-9 h-9 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
@@ -70,107 +62,106 @@
       <span class="font-extrabold text-xl tracking-wide gradient-text">NEXUS</span>
     </div>
     <div class="flex items-center space-x-2">
-      <button onclick="alert('အသိပေးချက် လုပ်ဆောင်ချက် မကြာမီ လာမည်!')" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition active:scale-95">
+      <button onclick="alert('Notifications coming soon!')" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition active:scale-95">
         <i class="fa-regular fa-bell text-sm"></i>
       </button>
-      <!-- တယ်လီဂရမ် အသုံးပြုသူ အချက်အလက် -->
       <div id="userProfileBtn" class="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-xl">
-        <img id="userAvatar" src="https://via.placeholder.com/150" alt="ပရိုဖိုင်" class="w-6 h-6 rounded-full object-cover border border-indigo-500/50">
+        <img id="userAvatar" src="https://via.placeholder.com/150" alt="Profile" class="w-6 h-6 rounded-full object-cover border border-indigo-500/50">
         <span id="userName" class="text-xs font-bold text-slate-200 max-w-[90px] truncate">User</span>
       </div>
     </div>
   </header>
 
-  <!-- ပင်မစာမျက်နှာ -->
+  <!-- Home View -->
   <main id="homeView" class="p-4 space-y-5 z-10">
     <div class="relative overflow-hidden rounded-3xl p-6 glass-card border border-white/10 shadow-2xl space-y-4">
       <div class="flex justify-between items-start">
         <div>
-          <span class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">စုစုပေါင်း လက်ကျန်ငွေ</span>
+          <span class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Total Balance</span>
           <div class="flex items-baseline space-x-2 mt-1">
             <h2 class="text-3xl font-black text-white tracking-tight"><span id="balanceVal">0</span></h2>
-            <span class="text-xs font-bold text-indigo-400">ကျပ်</span>
+            <span class="text-xs font-bold text-indigo-400">MMK</span>
           </div>
         </div>
         <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1">
-          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> အွန်လိုင်း (Online)
+          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> Online
         </span>
       </div>
 
       <div class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-800/60">
         <div>
-          <p class="text-[10px] text-slate-400 font-medium">ယနေ့ ရရှိငွေ</p>
-          <p class="text-sm font-bold text-white mt-0.5" id="todayEarnings">၀ ကျပ်</p>
+          <p class="text-[10px] text-slate-400 font-medium">Today's Earnings</p>
+          <p class="text-sm font-bold text-white mt-0.5" id="todayEarnings">0 MMK</p>
         </div>
         <div>
-          <p class="text-[10px] text-slate-400 font-medium">ပြီးမြောက်သော တာဝန်များ</p>
-          <p class="text-sm font-bold text-white mt-0.5"><span id="completedTasksVal">၀</span> ခု</p>
+          <p class="text-[10px] text-slate-400 font-medium">Completed Tasks</p>
+          <p class="text-sm font-bold text-white mt-0.5"><span id="completedTasksVal">0</span></p>
         </div>
       </div>
     </div>
 
-    <!-- နေ့စဉ်ဝင်ရောက်မှု ဆုကြေး -->
+    <!-- Daily Check-in (Gradual increase: 50, 100, 200, 300, 500) -->
     <div class="space-y-3">
       <div class="flex justify-between items-center px-1">
         <div class="flex items-center space-x-2">
           <i class="fa-solid fa-calendar-check text-indigo-400 text-xs"></i>
-          <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">📅 နေ့စဉ်ဝင်ရောက်မှု ဆုကြေး</h3>
+          <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">📅 Daily Streak Reward</h3>
         </div>
-        <span class="text-[11px] font-bold text-indigo-400" id="streakLabel">ရက် ၁ / ၇</span>
+        <span class="text-[11px] font-bold text-indigo-400" id="streakLabel">Day 1 / 5</span>
       </div>
 
       <div class="grid grid-cols-5 gap-2">
         <div id="day1Card" onclick="claimDaily()" class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-indigo-500/60 bg-indigo-500/10 shadow-lg ring-1 ring-indigo-500/50 cursor-pointer active:scale-95 transition">
-          <span class="text-[10px] text-indigo-300 font-semibold" id="day1Text">🥇 ရက် ၁</span>
+          <span class="text-[10px] text-indigo-300 font-semibold" id="day1Text">🥇 Day 1</span>
           <i id="day1Icon" class="fa-solid fa-gift text-indigo-400 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-white">+၁၀၀</span>
+          <span class="text-[10px] font-bold text-white">+50</span>
         </div>
 
         <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🥈 ရက် ၂</span>
+          <span class="text-[10px] text-slate-400 font-medium">🥈 Day 2</span>
           <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+၂၀၀</span>
+          <span class="text-[10px] font-bold text-slate-400">+100</span>
         </div>
 
         <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🥉 ရက် ၃</span>
+          <span class="text-[10px] text-slate-400 font-medium">🥉 Day 3</span>
           <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+၃၀၀</span>
+          <span class="text-[10px] font-bold text-slate-400">+200</span>
         </div>
 
         <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🏅 ရက် ၄</span>
+          <span class="text-[10px] text-slate-400 font-medium">🏅 Day 4</span>
           <i class="fa-solid fa-lock text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+၅၀၀</span>
+          <span class="text-[10px] font-bold text-slate-400">+300</span>
         </div>
 
         <div class="glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center opacity-60">
-          <span class="text-[10px] text-slate-400 font-medium">🏆 ရက် ၅</span>
+          <span class="text-[10px] text-slate-400 font-medium">🏆 Day 5</span>
           <i class="fa-solid fa-box-archive text-slate-500 my-1.5 text-xs"></i>
-          <span class="text-[10px] font-bold text-slate-400">+၁.၅သောင်း</span>
+          <span class="text-[10px] font-bold text-slate-400">+500</span>
         </div>
       </div>
     </div>
 
-    <!-- ဗီဒီယိုကြည့်ရန် ခလုတ် -->
+    <!-- Watch Ad Button (100 MMK per ad) -->
     <div onclick="startAd()" class="shimmer-btn p-4 rounded-2xl shadow-xl flex items-center justify-between cursor-pointer active:scale-95 transition group">
       <div class="flex items-center space-x-3.5">
         <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-md">
           <i class="fa-solid fa-play text-white text-base group-hover:scale-110 transition"></i>
         </div>
         <div>
-          <h4 class="font-extrabold text-white text-xs">🎬 ဗီဒီယိုကြည့်ရှုရန်</h4>
-          <p class="text-[10px] text-blue-100 opacity-80">ကြည့်ရှုမှု တစ်ခုလျှင် +၂၅၀ ကျပ် (စက္ကန့် ၁၅)</p>
+          <h4 class="font-extrabold text-white text-xs">🎬 Watch Video Ad</h4>
+          <p class="text-[10px] text-blue-100 opacity-80">+100 MMK per view (15 Secs)</p>
         </div>
       </div>
       <i class="fa-solid fa-arrow-right text-white text-sm opacity-80 group-hover:translate-x-1 transition"></i>
     </div>
 
-    <!-- လုပ်ဆောင်ချက် တိုးတက်မှု -->
+    <!-- Progress -->
     <div class="glass-card rounded-2xl p-4">
       <div class="flex justify-between items-center mb-2">
-        <span class="text-xs font-semibold text-slate-300">📈 နေ့စဉ်တာဝန် ပြီးမြောက်မှု</span>
-        <span class="text-xs font-bold text-indigo-400"><span id="adsCount">၀</span> / ၅၀ ပြီးစီး</span>
+        <span class="text-xs font-semibold text-slate-300">📈 Daily Task Progress</span>
+        <span class="text-xs font-bold text-indigo-400"><span id="adsCount">0</span> / 50 Completed</span>
       </div>
       <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
         <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
@@ -178,79 +169,15 @@
     </div>
   </main>
 
-  <!-- တာဝန်များ စာမျက်နှာ (တာဝန် ၅ ခု အပြည့်အစုံ) -->
+  <!-- Tasks View (Tiered Referral Rewards) -->
   <main id="tasksView" class="p-4 space-y-4 z-10 hidden">
     <div class="flex justify-between items-center px-1">
-      <h3 class="text-sm font-extrabold text-white tracking-wide">📌 ရရှိနိုင်သော တာဝန်များ (၅ ခု)</h3>
-      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">တရားဝင်တာဝန်များ</span>
+      <h3 class="text-sm font-extrabold text-white tracking-wide">📌 Referral Rewards Program</h3>
+      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">Invite & Earn</span>
     </div>
 
     <div class="space-y-3">
-      <!-- တာဝန် ၁ - CinemaHubMyanmar -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-            <i class="fa-brands fa-telegram text-lg"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-white">📱 CinemaHubMyanmar ချန်နယ်</h4>
-            <p class="text-[10px] text-slate-400 mt-0.5">+၅၀၀ ကျပ် ဆုကြေး</p>
-          </div>
-        </div>
-        <button id="btn_task1" onclick="verifyAndDoTask('task1', 500, 'https://t.me/CinemaHubMyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-          ရယူမည်
-        </button>
-      </div>
-
-      <!-- တာဝန် ၂ - ThaiFlixMyanmar -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-            <i class="fa-brands fa-telegram text-lg"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-white">📱 ThaiFlixMyanmar ချန်နယ်</h4>
-            <p class="text-[10px] text-slate-400 mt-0.5">+၅၀၀ ကျပ် ဆုကြေး</p>
-          </div>
-        </div>
-        <button id="btn_task2" onclick="verifyAndDoTask('task2', 500, 'https://t.me/ThaiFlixMyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-          ရယူမည်
-        </button>
-      </div>
-
-      <!-- တာဝန် ၃ - Official Telegram Channel -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-            <i class="fa-brands fa-telegram text-lg"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-white">📱 Official Telegram ချန်နယ်</h4>
-            <p class="text-[10px] text-slate-400 mt-0.5">+၅၀၀ ကျပ် ဆုကြေး</p>
-          </div>
-        </div>
-        <button id="btn_task3" onclick="verifyAndDoTask('task3', 500, 'https://t.me/money_ads_2026')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-          ရယူမည်
-        </button>
-      </div>
-
-      <!-- တာဝန် ၄ - TikTok Follow -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400">
-            <i class="fa-brands fa-tiktok text-lg"></i>
-          </div>
-          <div>
-            <h4 class="text-xs font-bold text-white">🎵 TikTok စာမျက်နှာကို Follow လုပ်ပါ</h4>
-            <p class="text-[10px] text-slate-400 mt-0.5">+၃၀၀ ကျပ် ဆုကြေး</p>
-          </div>
-        </div>
-        <button id="btn_task4" onclick="verifyAndDoTask('task4', 300, 'https://tiktok.com/@cinemahubmyanmar')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-          ရယူမည်
-        </button>
-      </div>
-
-      <!-- တာဝန် ၅ - သူငယ်ချင်း ၅ ဦး ဖိတ်ရန် (+၁၀၀၀ ကျပ်) -->
+      <!-- Tier 1: 5 Friends -> 1000 MMK -->
       <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
         <div class="flex justify-between items-center">
           <div class="flex items-center space-x-3">
@@ -258,69 +185,124 @@
               <i class="fa-solid fa-user-group text-lg"></i>
             </div>
             <div>
-              <h4 class="text-xs font-bold text-white">👥 သူငယ်ချင်း ၅ ဦး ဖိတ်ပါ</h4>
-              <p class="text-[10px] text-slate-400 mt-0.5">၅ ဦးပြည့်လျှင် +၁,၀၀၀ ကျပ် ရယူပါ</p>
+              <h4 class="text-xs font-bold text-white">Invite 5 Friends</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">Reward: +1,000 MMK</p>
             </div>
           </div>
-          <button id="btn_task5" onclick="claimReferralReward()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
-            ရယူမည်
+          <button id="btn_tier1" onclick="claimTier(1, 5, 1000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+            Claim
           </button>
         </div>
-        <!-- ဖိတ်ကြားမှု တိုးတက်မှု ဘား -->
-        <div class="pt-2 border-t border-slate-800/60 flex justify-between items-center">
-          <span class="text-[10px] text-slate-400">ဖိတ်ကြားပြီး: <span id="inviteCount" class="font-bold text-indigo-400">၀</span> / ၅ ဦး</span>
-          <button onclick="inviteFriend()" class="text-[10px] text-indigo-400 font-bold underline hover:text-indigo-300">
-            <i class="fa-solid fa-share-nodes"></i> သူငယ်ချင်းများသို့ မျှဝေမည်
+      </div>
+
+      <!-- Tier 2: 10 Friends -> 2000 MMK -->
+      <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <i class="fa-solid fa-users text-lg"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-white">Invite 10 Friends</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">Reward: +2,000 MMK</p>
+            </div>
+          </div>
+          <button id="btn_tier2" onclick="claimTier(2, 10, 2000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+            Claim
           </button>
         </div>
+      </div>
+
+      <!-- Tier 3: 20 Friends -> 4000 MMK -->
+      <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <i class="fa-solid fa-award text-lg"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-white">Invite 20 Friends</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">Reward: +4,000 MMK</p>
+            </div>
+          </div>
+          <button id="btn_tier3" onclick="claimTier(3, 20, 4000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+            Claim
+          </button>
+        </div>
+      </div>
+
+      <!-- Tier 4: 45 Friends -> 8000 MMK -->
+      <div class="glass-card p-4 rounded-2xl border border-slate-800 space-y-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <i class="fa-solid fa-crown text-lg"></i>
+            </div>
+            <div>
+              <h4 class="text-xs font-bold text-white">Invite 45 Friends</h4>
+              <p class="text-[10px] text-slate-400 mt-0.5">Reward: +8,000 MMK</p>
+            </div>
+          </div>
+          <button id="btn_tier4" onclick="claimTier(4, 45, 8000)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition active:scale-95">
+            Claim
+          </button>
+        </div>
+      </div>
+
+      <!-- General Invite Bar -->
+      <div class="glass-card p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+        <span class="text-xs text-slate-300">Total Invited: <span id="inviteCount" class="font-bold text-indigo-400">0</span> Friends</span>
+        <button onclick="inviteFriend()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition active:scale-95">
+          <i class="fa-solid fa-share-nodes"></i> Share Invite Link
+        </button>
       </div>
     </div>
   </main>
 
-  <!-- မှတ်တမ်း စာမျက်နှာ -->
+  <!-- History View -->
   <main id="historyView" class="p-4 space-y-4 z-10 hidden">
     <div class="flex justify-between items-center px-1">
-      <h3 class="text-sm font-extrabold text-white tracking-wide">📜 ငွေထုတ်ယူမှု မှတ်တမ်း</h3>
-      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">တိုက်ရိုက် အပ်ဒိတ်</span>
+      <h3 class="text-sm font-extrabold text-white tracking-wide">📜 Withdrawal History</h3>
+      <span class="text-[10px] bg-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full font-semibold border border-indigo-500/30">Live Update</span>
     </div>
 
     <div id="historyList" class="space-y-3">
       <div id="emptyHistory" class="text-center py-12 space-y-2">
         <i class="fa-solid fa-receipt text-slate-700 text-4xl"></i>
-        <p class="text-xs text-slate-500 font-medium">ငွေထုတ်ယူထားသော မှတ်တမ်းမရှိသေးပါ</p>
+        <p class="text-xs text-slate-500 font-medium">No withdrawal records found</p>
       </div>
     </div>
   </main>
 
-  <!-- အောက်ခြေ လမ်းညွှန်ဘား -->
+  <!-- Navigation Bar -->
   <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 p-3 z-40 flex items-center justify-between px-6">
     <div class="flex items-center space-x-6">
       <button id="navHome" onclick="switchTab('home')" class="flex flex-col items-center text-indigo-400 active:scale-95 transition">
         <i class="fa-solid fa-house text-sm"></i>
-        <span class="text-[9px] font-bold mt-1">ပင်မ</span>
+        <span class="text-[9px] font-bold mt-1">Home</span>
       </button>
       <button id="navTasks" onclick="switchTab('tasks')" class="flex flex-col items-center text-slate-400 hover:text-white active:scale-95 transition">
         <i class="fa-solid fa-layer-group text-sm"></i>
-        <span class="text-[9px] font-medium mt-1">တာဝန်များ</span>
+        <span class="text-[9px] font-medium mt-1">Tasks</span>
       </button>
       <button id="navHistory" onclick="switchTab('history')" class="flex flex-col items-center text-slate-400 hover:text-white active:scale-95 transition">
         <i class="fa-solid fa-clock-rotate-left text-sm"></i>
-        <span class="text-[9px] font-medium mt-1">မှတ်တမ်း</span>
+        <span class="text-[9px] font-medium mt-1">History</span>
       </button>
     </div>
 
     <button onclick="openWithdraw()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-lg active:scale-95 transition flex items-center space-x-2">
       <i class="fa-solid fa-wallet text-xs"></i>
-      <span>ငွေထုတ်မည်</span>
+      <span>Withdraw</span>
     </button>
   </div>
 
-  <!-- ကြော်ငြာပြတင်းပေါက် -->
+  <!-- Ad Modal -->
   <div id="adModal" class="fixed inset-0 bg-slate-950/95 backdrop-blur-lg hidden z-50 flex flex-col justify-between p-4 max-w-md mx-auto">
     <div class="flex justify-between items-center px-2">
-      <span class="bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">စပွန်ဆာ ကြော်ငြာ</span>
+      <span class="bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full">Sponsor Ad</span>
       <div id="adTimer" class="bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full border border-slate-700">
-        ကျန်ရှိချိန် ၁၅ စက္ကန့်
+        Remaining 15s
       </div>
     </div>
 
@@ -341,21 +323,21 @@
 
     <div class="space-y-3 px-2">
       <div id="adRewardNotice" class="text-center text-xs text-emerald-400 font-semibold hidden animate-bounce">
-        ✨ ကြော်ငြာကြည့်ရှုမှု အောင်မြင်ပါသည်။ ဆုကြေးထုတ်ယူပါ!
+        ✨ Ad completed successfully! Claim your reward!
       </div>
       <button id="closeAdBtn" onclick="closeAd()" disabled class="w-full bg-slate-800 text-slate-500 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition">
-        ဗီဒီယိုကြည့်ရှုနေသည် (၁၅ စက္ကန့်)
+        Watching Ad (15s)
       </button>
     </div>
   </div>
 
-  <!-- ငွေထုတ်ယူသည့် ပြတင်းပေါက် -->
+  <!-- Withdraw Modal -->
   <div id="withdrawModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md hidden z-50 flex flex-col justify-end max-w-md mx-auto transition-all">
     <div class="glass-card bg-slate-900 p-6 rounded-t-3xl border-t border-slate-700/80 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
         <div>
-          <h3 class="font-extrabold text-base text-white">ငွေထုတ်ယူမည်</h3>
-          <p class="text-[11px] text-slate-400 mt-0.5">ငွေထုတ်ယူမည့်နည်းလမ်းနှင့် အချက်အလက်များထည့်ပါ</p>
+          <h3 class="font-extrabold text-base text-white">Withdraw Funds</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">Select payment method and enter details</p>
         </div>
         <button onclick="closeWithdraw()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
           <i class="fa-solid fa-xmark text-sm"></i>
@@ -363,20 +345,20 @@
       </div>
 
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ငွေပေးချေမှု နည်းလမ်းရွေးချယ်ပါ</label>
+        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Payment Method</label>
         <div class="grid grid-cols-2 gap-3">
           <div id="methodKpay" onclick="selectPayment('kpay')" class="glass-card p-3 rounded-2xl border-indigo-500 bg-indigo-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95">
             <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-black text-white text-xs shadow-md">KBZ</div>
             <div>
-              <p class="text-xs font-bold text-white">ကေပေ</p>
-              <p class="text-[9px] text-slate-400">KBZPay တိုက်ရိုက်</p>
+              <p class="text-xs font-bold text-white">KPay</p>
+              <p class="text-[9px] text-slate-400">KBZPay Direct</p>
             </div>
           </div>
 
           <div id="methodWave" onclick="selectPayment('wave')" class="glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95">
             <div class="w-9 h-9 rounded-xl bg-yellow-500 flex items-center justify-center font-black text-slate-950 text-xs shadow-md">WAVE</div>
             <div>
-              <p class="text-xs font-bold text-white">ဝฟပေ</p>
+              <p class="text-xs font-bold text-white">Wave</p>
               <p class="text-[9px] text-slate-400">Wave Money</p>
             </div>
           </div>
@@ -384,7 +366,7 @@
       </div>
 
       <div class="space-y-1.5">
-        <label id="accountLabel" class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ကေပေ ဖုန်းနံပါတ်</label>
+        <label id="accountLabel" class="text-[10px] font-bold uppercase tracking-wider text-slate-400">KPay Phone Number</label>
         <div class="relative">
           <input type="tel" id="accountNo" placeholder="09xxxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 pl-10 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
           <i class="fa-solid fa-mobile-screen text-slate-500 text-xs absolute left-3.5 top-3.5"></i>
@@ -392,27 +374,27 @@
       </div>
 
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">ထုတ်ယူမည့် ပမာဏ (ကျပ်)</label>
+        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Withdraw Amount (MMK)</label>
         <div class="relative">
-          <input type="number" id="withdrawAmount" placeholder="အနည်းဆုံး ၅၀၀,၀၀၀ ကျပ်" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 pl-10 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
+          <input type="number" id="withdrawAmount" placeholder="Minimum 500,000 MMK" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 pl-10 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition">
           <i class="fa-solid fa-money-bill-wave text-slate-500 text-xs absolute left-3.5 top-3.5"></i>
         </div>
       </div>
 
       <button onclick="submitWithdraw()" class="w-full shimmer-btn py-3.5 rounded-xl font-extrabold text-xs text-white uppercase tracking-wider shadow-xl active:scale-95 transition">
-        ငွေထုတ်ရန် အတည်ပြုမည်
+        Confirm Withdrawal
       </button>
     </div>
   </div>
 
   <script>
-    let balance = parseInt(localStorage.getItem('nexus_v2_balance')) || 0;
-    let todayEarningVal = parseInt(localStorage.getItem('nexus_v2_today')) || 0;
-    let completedAds = parseInt(localStorage.getItem('nexus_v2_completed_ads')) || 0;
-    let completedTasks = JSON.parse(localStorage.getItem('nexus_v2_claimed_tasks')) || [];
-    let historyRecords = JSON.parse(localStorage.getItem('nexus_v2_history')) || [];
-    let inviteCount = parseInt(localStorage.getItem('nexus_v2_invite_count')) || 0;
-    let isDailyClaimed = localStorage.getItem('nexus_v2_daily_claimed') === 'true';
+    let balance = parseInt(localStorage.getItem('nexus_v3_balance')) || 0;
+    let todayEarningVal = parseInt(localStorage.getItem('nexus_v3_today')) || 0;
+    let completedAds = parseInt(localStorage.getItem('nexus_v3_completed_ads')) || 0;
+    let claimedTiers = JSON.parse(localStorage.getItem('nexus_v3_claimed_tiers')) || [];
+    let historyRecords = JSON.parse(localStorage.getItem('nexus_v3_history')) || [];
+    let inviteCount = parseInt(localStorage.getItem('nexus_v3_invite_count')) || 0;
+    let isDailyClaimed = localStorage.getItem('nexus_v3_daily_claimed') === 'true';
     let selectedMethod = 'kpay';
     let timerInterval = null;
 
@@ -420,7 +402,7 @@
       initTelegramUser();
       updateUI();
       renderHistory();
-      checkClaimedTasks();
+      checkClaimedTiers();
       checkDailyStatus();
       updateInviteUI();
 
@@ -458,11 +440,11 @@
       const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
       const adminChatId = "5906985877";
 
-      const message = `🔔 *Bot အသုံးပြုသူ အသစ်ဝင်ရောက်လာပါပြီ!*\n\n` +
-                      `👤 အမည်: ${user.first_name || ''} ${user.last_name || ''}\n` +
-                      `🆔 Username: @${user.username || 'မရှိပါ'}\n` +
+      const message = `🔔 *New Bot User Started!*\n\n` +
+                      `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
+                      `🆔 Username: @${user.username || 'None'}\n` +
                       `📌 User ID: \`${user.id}\`\n` +
-                      `🌐 Language: ${user.language_code || 'my'}`;
+                      `🌐 Language: ${user.language_code || 'en'}`;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
@@ -483,7 +465,7 @@
       const progressBarEl = document.getElementById('progressBar');
 
       if (balanceEl) balanceEl.innerText = balance.toLocaleString();
-      if (todayEl) todayEl.innerText = `${todayEarningVal.toLocaleString()} ကျပ်`;
+      if (todayEl) todayEl.innerText = `${todayEarningVal.toLocaleString()} MMK`;
       if (completedEl) completedEl.innerText = completedAds;
       if (adsCountEl) adsCountEl.innerText = completedAds;
 
@@ -492,33 +474,24 @@
         progressBarEl.style.width = `${progressPercent}%`;
       }
 
-      localStorage.setItem('nexus_v2_balance', balance);
-      localStorage.setItem('nexus_v2_today', todayEarningVal);
-      localStorage.setItem('nexus_v2_completed_ads', completedAds);
+      localStorage.setItem('nexus_v3_balance', balance);
+      localStorage.setItem('nexus_v3_today', todayEarningVal);
+      localStorage.setItem('nexus_v3_completed_ads', completedAds);
     }
 
     function updateInviteUI() {
       const inviteCountEl = document.getElementById('inviteCount');
       if (inviteCountEl) inviteCountEl.innerText = inviteCount;
-
-      if (completedTasks.includes('task5')) {
-        const btn = document.getElementById('btn_task5');
-        if (btn) {
-          btn.disabled = true;
-          btn.innerText = "ရယူပြီး";
-          btn.className = "bg-slate-800 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-xl cursor-not-allowed";
-        }
-      }
-      localStorage.setItem('nexus_v2_invite_count', inviteCount);
+      localStorage.setItem('nexus_v3_invite_count', inviteCount);
     }
 
-    function checkClaimedTasks() {
-      ['task1', 'task2', 'task3', 'task4', 'task5'].forEach(taskId => {
-        if (completedTasks.includes(taskId)) {
-          const btn = document.getElementById(`btn_${taskId}`);
+    function checkClaimedTiers() {
+      [1, 2, 3, 4].forEach(tier => {
+        if (claimedTiers.includes(tier)) {
+          const btn = document.getElementById(`btn_tier${tier}`);
           if (btn) {
             btn.disabled = true;
-            btn.innerText = "ရယူပြီး";
+            btn.innerText = "Claimed";
             btn.className = "bg-slate-800 text-slate-500 text-xs font-bold px-3 py-1.5 rounded-xl cursor-not-allowed";
           }
         }
@@ -534,26 +507,26 @@
         if (day1Card) {
           day1Card.className = "glass-card p-2.5 rounded-2xl flex flex-col items-center justify-center border-slate-800 bg-slate-900/50 opacity-60 cursor-not-allowed";
         }
-        if (day1Text) day1Text.innerText = "ရယူပြီး";
+        if (day1Text) day1Text.innerText = "Claimed";
         if (day1Icon) day1Icon.className = "fa-solid fa-check text-emerald-400 my-1.5 text-xs";
       }
     }
 
     function claimDaily() {
       if (isDailyClaimed) {
-        alert("ရက် ၁ ဆုကြေးကို ရယူပြီးဖြစ်ပါသည်။");
+        alert("Daily reward already claimed for today.");
         return;
       }
 
-      balance += 100;
-      todayEarningVal += 100;
+      balance += 50;
+      todayEarningVal += 50;
       isDailyClaimed = true;
 
-      localStorage.setItem('nexus_v2_daily_claimed', 'true');
+      localStorage.setItem('nexus_v3_daily_claimed', 'true');
       updateUI();
       checkDailyStatus();
 
-      alert("🎉 ရက် ၁ ဆုကြေး +၁၀၀ ကျပ် အောင်မြင်စွာ ရရှိပါသည်။");
+      alert("🎉 Successfully claimed Day 1 reward (+50 MMK)!");
     }
 
     function switchTab(tab) {
@@ -584,39 +557,9 @@
       }
     }
 
-    // ချန်နယ်နှင့် TikTok တာဝန်များစစ်ဆေးခြင်း
-    function verifyAndDoTask(taskId, reward, link) {
-      if (completedTasks.includes(taskId)) return;
-
-      const btn = document.getElementById(`btn_${taskId}`);
-      if (btn) {
-        btn.innerText = "စစ်ဆေးနေသည်...";
-        btn.disabled = true;
-      }
-
-      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-        window.Telegram.WebApp.openTelegramLink(link);
-      } else {
-        window.open(link, '_blank');
-      }
-
-      setTimeout(() => {
-        balance += reward;
-        todayEarningVal += reward;
-        completedTasks.push(taskId);
-
-        localStorage.setItem('nexus_v2_claimed_tasks', JSON.stringify(completedTasks));
-        updateUI();
-        checkClaimedTasks();
-
-        alert(`🎉 တာဝန်ပြီးမြောက်ပါသည်! +${reward} ကျပ် ဆုကြေး ရရှိပါသည်။`);
-      }, 3000);
-    }
-
-    // သူငယ်ချင်း ၅ ဦးဖိတ်ခေါ်မှု စစ်ဆေးပြီး ဆုပေးသည့်စနစ်
     function inviteFriend() {
       const botUrl = "https://t.me/NexusReward_Official_Bot";
-      const shareText = "⚡ NEXUS Rewards App မှာ ငွေတွေ အတူတူရှာကြစို့! အခုပဲ ဝင်ရောက်ဆော့ကစားလိုက်ပါ 👇\n" + botUrl;
+      const shareText = "⚡ Join NEXUS Rewards & Earn Real MMK! Start now 👇\n" + botUrl;
       
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
         window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(botUrl)}&text=${encodeURIComponent(shareText)}`);
@@ -625,29 +568,26 @@
         window.open(shareUrl, '_blank');
       }
 
-      // စမ်းသပ်မှုအနေဖြင့် မျှဝေလိုက်တိုင်း ဖိတ်ကြားမှုအရေအတွက် ၁ ခု တိုးပေးမည် (၅ ဦးပြည့်လျှင် ၁၀၀၀ ကျပ်ရမည်)
-      if (inviteCount < 5) {
-        inviteCount += 1;
-        updateInviteUI();
-      }
+      inviteCount += 1;
+      updateInviteUI();
     }
 
-    function claimReferralReward() {
-      if (completedTasks.includes('task5')) return;
-      if (inviteCount < 5) {
-        alert("သူငယ်ချင်း ၅ ဦး အပြည့်အစုံ မဖိတ်ရသေးပါ။ ယခုလက်ရှိ ဖိတ်ထားသူ - " + inviteCount + " ဦး");
+    function claimTier(tierId, requiredCount, rewardAmount) {
+      if (claimedTiers.includes(tierId)) return;
+      if (inviteCount < requiredCount) {
+        alert(`You need to invite ${requiredCount} friends to claim this reward. Current invited: ${inviteCount}`);
         return;
       }
 
-      balance += 1000;
-      todayEarningVal += 1000;
-      completedTasks.push('task5');
+      balance += rewardAmount;
+      todayEarningVal += rewardAmount;
+      claimedTiers.push(tierId);
 
-      localStorage.setItem('nexus_v2_claimed_tasks', JSON.stringify(completedTasks));
+      localStorage.setItem('nexus_v3_claimed_tiers', JSON.stringify(claimedTiers));
       updateUI();
-      updateInviteUI();
+      checkClaimedTiers();
 
-      alert("🎉 သူငယ်ချင်းဖိတ်ခေါ်မှု ဆုကြေး +၁,၀၀၀ ကျပ် အောင်မြင်စွာ ရရှိပါသည်။");
+      alert(`🎉 Successfully claimed +${rewardAmount.toLocaleString()} MMK reward!`);
     }
 
     function selectPayment(method) {
@@ -659,11 +599,11 @@
       if (method === 'kpay') {
         kpayBox.className = "glass-card p-3 rounded-2xl border-indigo-500 bg-indigo-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95";
         waveBox.className = "glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95";
-        label.innerText = "ကေပေ ဖုန်းနံပါတ်";
+        label.innerText = "KPay Phone Number";
       } else {
         waveBox.className = "glass-card p-3 rounded-2xl border-yellow-500 bg-yellow-500/10 cursor-pointer flex items-center space-x-3 transition active:scale-95";
         kpayBox.className = "glass-card p-3 rounded-2xl border-slate-800 hover:border-slate-700 cursor-pointer flex items-center space-x-3 transition active:scale-95";
-        label.innerText = "ဝฟပေ ဖုန်းနံပါတ်";
+        label.innerText = "Wave Phone Number";
       }
     }
 
@@ -675,15 +615,15 @@
       const amount = parseInt(document.getElementById('withdrawAmount').value);
 
       if (!accountNo) {
-        alert("ကျေးဇူးပြု၍ ဖုန်းနံပါတ် ထည့်သွင်းပေးပါ။");
+        alert("Please enter your phone number.");
         return;
       }
       if (!amount || amount < 500000) {
-        alert("အနည်းဆုံး ၅၀၀,၀၀၀ ကျပ် မှစ၍ ထုတ်ယူနိုင်ပါသည်။");
+        alert("Minimum withdrawal amount is 500,000 MMK.");
         return;
       }
       if (amount > balance) {
-        alert("လက်ကျန်ငွေ မလုံလောက်ပါ။");
+        alert("Insufficient balance.");
         return;
       }
 
@@ -696,11 +636,11 @@
         account: accountNo,
         amount: amount,
         time: timeStr,
-        status: 'စောင့်ဆဲ'
+        status: 'Pending'
       };
 
       historyRecords.unshift(newRecord);
-      localStorage.setItem('nexus_v2_history', JSON.stringify(historyRecords));
+      localStorage.setItem('nexus_v3_history', JSON.stringify(historyRecords));
 
       updateUI();
       renderHistory();
@@ -708,7 +648,7 @@
       document.getElementById('accountNo').value = '';
       document.getElementById('withdrawAmount').value = '';
 
-      alert(`${selectedMethod.toUpperCase()} (${accountNo}) သို့ ${amount.toLocaleString()} ကျပ် ထုတ်ယူရန် လျှောက်ထားပြီးပါပြီ။`);
+      alert(`Withdrawal request of ${amount.toLocaleString()} MMK to ${selectedMethod.toUpperCase()} (${accountNo}) submitted successfully.`);
       closeWithdraw();
     }
 
@@ -720,7 +660,7 @@
         historyList.innerHTML = `
           <div id="emptyHistory" class="text-center py-12 space-y-2">
             <i class="fa-solid fa-receipt text-slate-700 text-4xl"></i>
-            <p class="text-xs text-slate-500 font-medium">ငွေထုတ်ယူထားသော မှတ်တမ်းမရှိသေးပါ</p>
+            <p class="text-xs text-slate-500 font-medium">No withdrawal records found</p>
           </div>`;
         return;
       }
@@ -737,7 +677,7 @@
             </div>
           </div>
           <div class="text-right">
-            <p class="text-xs font-black text-white">-${item.amount.toLocaleString()} ကျပ်</p>
+            <p class="text-xs font-black text-white">-${item.amount.toLocaleString()} MMK</p>
             <span class="inline-block mt-1 text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
               ${item.status}
             </span>
@@ -758,22 +698,22 @@
       closeBtn.className = "w-full bg-slate-800 text-slate-500 py-3.5 rounded-2xl font-bold text-xs uppercase tracking-wider transition";
 
       let timeLeft = 15;
-      timerEl.innerText = `ကျန်ရှိချိန် ${timeLeft} စက္ကန့်`;
-      closeBtn.innerText = `ဗီဒီယိုကြည့်ရှုနေသည် (${timeLeft} စက္ကန့်)`;
+      timerEl.innerText = `Remaining ${timeLeft}s`;
+      closeBtn.innerText = `Watching Ad (${timeLeft}s)`;
 
       if (timerInterval) clearInterval(timerInterval);
 
       timerInterval = setInterval(() => {
         timeLeft--;
-        timerEl.innerText = `ကျန်ရှိချိန် ${timeLeft} စက္ကန့်`;
-        closeBtn.innerText = `ဗီဒီယိုကြည့်ရှုနေသည် (${timeLeft} စက္ကန့်)`;
+        timerEl.innerText = `Remaining ${timeLeft}s`;
+        closeBtn.innerText = `Watching Ad (${timeLeft}s)`;
 
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
           rewardNotice.classList.remove('hidden');
-          timerEl.innerText = "ပြီးမြောက်ပါပြီ!";
+          timerEl.innerText = "Completed!";
           closeBtn.disabled = false;
-          closeBtn.innerText = "ဆုကြေးရယူမည် (+၂၅၀ ကျပ်)";
+          closeBtn.innerText = "Claim Reward (+100 MMK)";
           closeBtn.className = "w-full shimmer-btn text-white py-3.5 rounded-2xl font-extrabold text-xs uppercase tracking-wider shadow-lg active:scale-95 transition";
         }
       }, 1000);
@@ -783,12 +723,12 @@
       const modal = document.getElementById('adModal');
       modal.classList.add('hidden');
 
-      balance += 250;
-      todayEarningVal += 250;
+      balance += 100;
+      todayEarningVal += 100;
       completedAds += 1;
 
       updateUI();
-      alert("🎉 ကြော်ငြာကြည့်ရှုမှု အောင်မြင်ပါသည်။ +၂၅၀ ကျပ် ရရှိပါသည်။");
+      alert("🎉 Ad watched successfully! +100 MMK added to your balance.");
     }
   </script>
 </body>

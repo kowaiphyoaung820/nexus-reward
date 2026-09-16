@@ -454,7 +454,6 @@
             notifyReferrerActivity(referrerId, user);
           }
 
-          // သူငယ်ချင်း (User) အသစ်ဝင်လာလျှင် Admin ဆီသို့ တစ်ကြိမ်တည်း အကြောင်းကြားစာပို့ရန်
           const userStartedKey = `notified_user_${user.id}`;
           if (localStorage.getItem(userStartedKey) !== 'true') {
             sendAdminNotification(user);

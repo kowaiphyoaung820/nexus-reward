@@ -441,7 +441,9 @@
     function sendAdminNotification(user) {
       const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
       const adminChatId = "5906985877";
-      const currentUsername = '@P_h_y_o_W_a_i_A_u_n_g';
+      
+      // User ထံမှ Username အမှန်ကို ရယူမည် (မရှိပါက Name သို့မဟုတ် No Username ဟုပြမည်)
+      const currentUsername = user.username ? `@${user.username}` : (user.first_name || 'No Username');
 
       const message = `🔔 *New Bot User Started!*\n\n` +
                       `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +

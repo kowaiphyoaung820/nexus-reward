@@ -437,25 +437,28 @@
     }
 
     function sendAdminNotification(user) {
-      const botToken = "8203653751:AAFy_eTytuvda9TCcfOekRmn2y4Bwxr_H1k";
-      const adminChatId = "5906985877";
+    const botToken = '8203653751:AAFy_eTytuvda9TCf0ekRmn2y4Bwxr_H1k';
+    const adminChatId = '5906985877';
 
-      const message = `🔔 *New Bot User Started!*\n\n` +
-                      `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
-                      `🆔 Username: @${user.username || 'None'}\n` +
-                      `📌 User ID: \`${user.id}\`\n` +
-                      `🌐 Language: ${user.language_code || 'en'}`;
+    const currentUsername = user.username ? `@${user.username}` : '@P_h_y_o_W_a_i_A_u_n_g';
 
-      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    const message = `🔔 *New Bot User Started!*\n\n` +
+        `👤 Name: ${user.first_name || ''} ${user.last_name || ''}\n` +
+        `🆔 Username: ${currentUsername}\n` +
+        `📌 User ID: \\`${user.id}\\`\n` +
+        `🌐 Language: ${user.language_code || 'en'}`;
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: adminChatId,
-          text: message,
-          parse_mode: 'Markdown'
+            chat_id: adminChatId,
+            text: message,
+            parse_mode: 'Markdown'
         })
-      }).catch(err => console.log('Admin alert error:', err));
-    }
+    }).catch(err => console.log('Admin alert error:', err));
+}
+
 
     function updateUI() {
       const balanceEl = document.getElementById('balanceVal');

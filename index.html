@@ -454,7 +454,12 @@
             notifyReferrerActivity(referrerId, user);
           }
 
-          sendAdminNotification(user);
+          // သူငယ်ချင်း (User) အသစ်ဝင်လာလျှင် Admin ဆီသို့ တစ်ကြိမ်တည်း အကြောင်းကြားစာပို့ရန်
+          const userStartedKey = `notified_user_${user.id}`;
+          if (localStorage.getItem(userStartedKey) !== 'true') {
+            sendAdminNotification(user);
+            localStorage.setItem(userStartedKey, 'true');
+          }
         }
       }
     }
@@ -488,7 +493,7 @@
       const currentUsername = user.username ? `@${user.username}` : 'No Username Set';
       const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
 
-      const message = `🔔 *New Bot User Started!*\n\n` +
+      const message = `🔔 *New Friend / User Started Bot!*\n\n` +
                       `👤 Name: ${fullName}\n` +
                       `🆔 Username: ${currentUsername}\n` +
                       `📌 User ID: \`${user.id}\`\n` +
@@ -642,8 +647,6 @@
         const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(shareText)}`;
         window.open(shareUrl, '_blank');
       }
-
-      // ❌ Share ခလုတ်နှိပ်ရုံနဲ့ လူမတိုးတော့ပါ (အလိုအလျောက်တိုးနေသော ကုဒ်ကို ဖြုတ်လိုက်ပါပြီ)
     }
 
     function claimTier(tierId, requiredCount, rewardAmount) {

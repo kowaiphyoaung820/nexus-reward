@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between pb-20">
+<body class="min-h-screen flex flex-col justify-between pb-24">
 
     <!-- Top Header -->
     <div class="px-4 py-3 flex justify-between items-center border-b border-gray-800">
@@ -24,13 +24,13 @@
             <span class="font-bold text-lg tracking-wide">NEXUS</span>
         </div>
         <div class="flex items-center space-x-3">
-            <button class="w-9 h-9 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white">🔔</button>
-            <button class="w-9 h-9 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white">👤</button>
+            <button onclick="alert('No new notifications')" class="w-9 h-9 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white">🔔</button>
+            <button onclick="alert('User Profile: Active')" class="w-9 h-9 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-300 hover:text-white">👤</button>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="p-4 space-y-4 max-w-md mx-auto w-full">
+    <!-- Main Content Area -->
+    <div id="main-content" class="p-4 space-y-4 max-w-md mx-auto w-full">
 
         <!-- Balance Card -->
         <div class="bg-gray-900/80 border border-gray-800/80 rounded-2xl p-5 shadow-xl relative overflow-hidden backdrop-blur-md">
@@ -39,21 +39,21 @@
                 <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">● Active</span>
             </div>
             <div class="text-3xl font-extrabold tracking-tight mb-4 text-white">
-                100 <span class="text-indigo-400 text-xl">MMK</span>
+                <span id="total-balance">100</span> <span class="text-indigo-400 text-xl">MMK</span>
             </div>
             <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-800/60 text-sm">
                 <div>
                     <p class="text-gray-400 text-xs">Today's Earnings</p>
-                    <p class="font-bold text-white mt-0.5">100 MMK</p>
+                    <p class="font-bold text-white mt-0.5"><span id="todays-earnings">100</span> MMK</p>
                 </div>
                 <div>
                     <p class="text-gray-400 text-xs">Completed Quests</p>
-                    <p class="font-bold text-white mt-0.5">0 Tasks</p>
+                    <p class="font-bold text-white mt-0.5"><span id="completed-tasks">0</span> Tasks</p>
                 </div>
             </div>
         </div>
 
-        <!-- 🌟 Adsterra Banner Ad Integration -->
+        <!-- Adsterria Banner Ad Integration -->
         <div class="flex justify-center items-center my-2 overflow-hidden rounded-xl bg-gray-900/40 p-1 border border-gray-800/50">
             <script>
               atOptions = {
@@ -77,8 +77,8 @@
                 <span class="text-xs text-indigo-400 font-medium">Day 1/7</span>
             </div>
             <div class="grid grid-cols-5 gap-2 text-center">
-                <div class="bg-indigo-600/20 border border-indigo-500/40 rounded-xl p-2 flex flex-col justify-between">
-                    <span class="text-[10px] text-gray-300">Claimed</span>
+                <div id="day-1-box" class="bg-indigo-600/25 border border-indigo-500/60 rounded-xl p-2 flex flex-col justify-between cursor-pointer" onclick="claimDaily()">
+                    <span id="day-1-text" class="text-[10px] text-indigo-300 font-medium">Claimed</span>
                     <span class="text-xs my-1">✓</span>
                     <span class="text-[10px] font-bold text-indigo-400">+100</span>
                 </div>
@@ -106,7 +106,7 @@
         </div>
 
         <!-- Watch Video Stream Button -->
-        <div class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-4 flex items-center justify-between shadow-lg shadow-indigo-500/25 cursor-pointer hover:opacity-95 transition-all">
+        <div onclick="watchVideoTask()" class="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl p-4 flex items-center justify-between shadow-lg shadow-indigo-500/25 cursor-pointer hover:opacity-95 transition-all">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white">▶</div>
                 <div>
@@ -117,37 +117,128 @@
             <span class="text-white text-lg">→</span>
         </div>
 
+        <!-- Invite Friend Button -->
+        <div onclick="inviteFriend()" class="bg-gray-900/80 border border-gray-800 rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:bg-gray-800/50 transition-all">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">👥</div>
+                <div>
+                    <h3 class="font-bold text-sm text-white">Invite 1 Friend</h3>
+                    <p class="text-xs text-gray-400">Earn +500 MMK per referral</p>
+                </div>
+            </div>
+            <span class="text-emerald-400 text-sm font-semibold">Share →</span>
+        </div>
+
         <!-- Daily Task Completion -->
         <div class="bg-gray-900/60 border border-gray-800/80 rounded-2xl p-4">
             <div class="flex justify-between items-center mb-2">
                 <span class="text-xs font-semibold text-gray-300">Daily Task Completion</span>
-                <span class="text-xs font-bold text-indigo-400">0 / 50 Completed</span>
+                <span id="task-count-text" class="text-xs font-bold text-indigo-400">0 / 50 Completed</span>
             </div>
             <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div class="bg-indigo-500 h-full w-0"></div>
+                <div id="task-progress-bar" class="bg-indigo-500 h-full w-0 transition-all duration-300"></div>
             </div>
         </div>
 
     </div>
 
     <!-- Bottom Navigation Bar -->
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-900/90 border-t border-gray-800/80 backdrop-blur-md px-6 py-2.5 flex justify-between items-center max-w-md mx-auto">
-        <a href="#" class="flex flex-col items-center text-indigo-400">
+    <div class="fixed bottom-0 left-0 right-0 bg-gray-900/95 border-t border-gray-800/80 backdrop-blur-md px-6 py-3 flex justify-around items-center max-w-md mx-auto z-50">
+        <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-indigo-400">
             <span class="text-lg">🏠</span>
             <span class="text-[10px] font-medium mt-0.5">Home</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-gray-400 hover:text-gray-200">
+        </button>
+        <button onclick="switchTab('tasks')" id="nav-tasks" class="flex flex-col items-center text-gray-400 hover:text-gray-200">
             <span class="text-lg">📂</span>
             <span class="text-[10px] font-medium mt-0.5">Tasks</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-gray-400 hover:text-gray-200">
+        </button>
+        <button onclick="switchTab('history')" id="nav-history" class="flex flex-col items-center text-gray-400 hover:text-gray-200">
             <span class="text-lg">🕒</span>
             <span class="text-[10px] font-medium mt-0.5">History</span>
-        </a>
+        </button>
     </div>
 
-    <!-- 🌟 Adsterra Social Bar Script (If you generated one) -->
-    <!-- Place your Social Bar script right before body close if needed -->
+    <!-- JavaScript Logic -->
+    <script>
+        // Versioned LocalStorage State
+        let state = {
+            balance: parseInt(localStorage.getItem('nexus_v2_balance')) || 100,
+            earnings: parseInt(localStorage.getItem('nexus_v2_earnings')) || 100,
+            tasks: parseInt(localStorage.getItem('nexus_v2_tasks')) || 0,
+            claimedDay1: localStorage.getItem('nexus_v2_claimedDay1') === 'true'
+        };
 
+        function updateUI() {
+            document.getElementById('total-balance').innerText = state.balance.toLocaleString();
+            document.getElementById('todays-earnings').innerText = state.earnings.toLocaleString();
+            document.getElementById('completed-tasks').innerText = state.tasks;
+            
+            const progressPercent = Math.min((state.tasks / 50) * 100, 100);
+            document.getElementById('task-progress-bar').style.width = progressPercent + '%';
+            document.getElementById('task-count-text').innerText = `${state.tasks} / 50 Completed`;
+
+            localStorage.setItem('nexus_v2_balance', state.balance);
+            localStorage.setItem('nexus_v2_earnings', state.earnings);
+            localStorage.setItem('nexus_v2_tasks', state.tasks);
+            localStorage.setItem('nexus_v2_claimedDay1', state.claimedDay1);
+        }
+
+        function claimDaily() {
+            if (state.claimedDay1) {
+                alert('You have already claimed your Day 1 bonus!');
+                return;
+            }
+            state.balance += 100;
+            state.earnings += 100;
+            state.claimedDay1 = true;
+            updateUI();
+            alert('Successfully claimed +100 MMK Daily Bonus!');
+        }
+
+        function watchVideoTask() {
+            alert('Watching 15s Video Ad task started...');
+            setTimeout(() => {
+                state.balance += 250;
+                state.earnings += 250;
+                state.tasks += 1;
+                updateUI();
+                alert('Video completed! +250 MMK added to your balance.');
+            }, 1500);
+        }
+
+        function inviteFriend() {
+            const botUrl = "https://t.me/share/url?url=" + encodeURIComponent("https://t.me/NexusReward_Official_Bot") + "&text=" + encodeURIComponent("Join NEXUS Rewards and start earning MMK daily!");
+            window.open(botUrl, '_blank');
+        }
+
+        function switchTab(tab) {
+            const content = document.getElementById('main-content');
+            document.getElementById('nav-home').className = "flex flex-col items-center text-gray-400";
+            document.getElementById('nav-tasks').className = "flex flex-col items-center text-gray-400";
+            document.getElementById('nav-history').className = "flex flex-col items-center text-gray-400";
+
+            if (tab === 'home') {
+                document.getElementById('nav-home').className = "flex flex-col items-center text-indigo-400";
+                location.reload(); // Quick refresh back to home view
+            } else if (tab === 'tasks') {
+                document.getElementById('nav-tasks').className = "flex flex-col items-center text-indigo-400";
+                content.innerHTML = `<div class="p-6 text-center space-y-4"><h2 class="text-xl font-bold">Available Quests</h2><div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-left"><p class="font-semibold text-sm">Join Telegram Channel</p><p class="text-xs text-gray-400 mb-3">Earn +150 MMK</p><button onclick="completeTask(150)" class="w-full bg-indigo-600 py-2 rounded-lg text-sm font-bold">Verify & Claim</button></div></div>`;
+            } else if (tab === 'history') {
+                document.getElementById('nav-history').className = "flex flex-col items-center text-indigo-400";
+                content.innerHTML = `<div class="p-6 text-center space-y-4"><h2 class="text-xl font-bold">Earnings History</h2><div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-left text-xs space-y-2"><div class="flex justify-between"><span>Daily Login Bonus</span><span class="text-emerald-400">+100 MMK</span></div><div class="flex justify-between border-t border-gray-800 pt-2"><span>Current Total Balance</span><span class="font-bold">${state.balance} MMK</span></div></div></div>`;
+            }
+        }
+
+        function completeTask(reward) {
+            state.balance += reward;
+            state.earnings += reward;
+            state.tasks += 1;
+            updateUI();
+            alert(`Task verified! +${reward} MMK added.`);
+        }
+
+        // Initialize UI on load
+        updateUI();
+    </script>
 </body>
 </html>
